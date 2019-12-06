@@ -68,7 +68,7 @@ public class CoreCommand implements CommandExecutor {
     // -----------------------------------------------------------------------------------------------------------------------------//
     public static boolean ignore(String label, CommandSender sender, List<String> argumentos){
 
-        sender.sendMessage("§cEsse comando ainda não foi ativado T.T");
+        sender.sendMessage("§cUse o comando /ignore");
         return true;
     }
 
@@ -81,7 +81,7 @@ public class CoreCommand implements CommandExecutor {
             return true;
         }
 
-        sender.sendMessage("§cEsse comando ainda não foi ativado T.T");
+        sender.sendMessage("§cUse o comando /ignore");
         return true;
     }
 
