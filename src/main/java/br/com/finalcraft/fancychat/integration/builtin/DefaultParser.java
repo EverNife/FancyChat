@@ -8,12 +8,8 @@ import org.bukkit.entity.Player;
 
 public class DefaultParser extends ThirdPartTagsParser {
 
-    private static boolean isHooked = false;
     public static void initialize(){
-        if (!isHooked){
-            isHooked = true;
-            addThirdPartTagsParser(new DefaultParser());
-        }
+        addThirdPartTagsParser(new DefaultParser());
     }
 
     @Override

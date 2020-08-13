@@ -2,6 +2,8 @@ package br.com.finalcraft.fancychat;
 
 import br.com.finalcraft.fancychat.commands.CommandRegisterer;
 import br.com.finalcraft.fancychat.config.ConfigManager;
+import br.com.finalcraft.fancychat.integration.builtin.BetterClansParser;
+import br.com.finalcraft.fancychat.integration.builtin.DeciPluginParser;
 import br.com.finalcraft.fancychat.integration.builtin.DefaultParser;
 import br.com.finalcraft.fancychat.integration.builtin.FactionsParser;
 import br.com.finalcraft.fancychat.listener.FancyChatListener;
@@ -9,10 +11,11 @@ import br.com.finalcraft.fancychat.placeholders.PlaceHolderIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class EverNifeFancyChat extends JavaPlugin{
+public class FancyChat extends JavaPlugin{
 
-    public static EverNifeFancyChat instance;
+    public static FancyChat instance;
 
     public static void info(String msg){
         instance.getLogger().info("[Info] " + msg.replace("&","§"));
@@ -44,14 +47,28 @@ public class EverNifeFancyChat extends JavaPlugin{
         //Iniciando PlaceHolderAPI Integration
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
             info("&aIntegration to PlaceHolderAPI");
-            PlaceHolderIntegration.initialize(this);
+            PlaceHolderIntegration.initialize();
         }
 
-        //Iniciando Factions Integration
-        if (Bukkit.getPluginManager().isPluginEnabled("Factions")){
-            info("&aIntegration to Factions");
-            FactionsParser.initialize();
-        }
+        new BukkitRunnable(){
+            @Override
+            public void run() {
+                if (Bukkit.getPluginManager().isPluginEnabled("Factions")){
+                    info("&aIntegration to Factions");
+                    FactionsParser.initialize();
+                }
+
+                if (Bukkit.getPluginManager().isPluginEnabled("EverNifeBetterClans")){
+                    info("&aIntegration to BetterClans");
+                    BetterClansParser.initialize();
+                }
+
+                if (Bukkit.getPluginManager().isPluginEnabled("EverNifeDeciPlugin")){
+                    info("&aIntegration to DeciPlugin");
+                    DeciPluginParser.initialize();
+                }
+            }
+        }.runTaskLater(instance,1);
 
         DefaultParser.initialize();
     }

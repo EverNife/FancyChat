@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.util;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 import br.com.finalcraft.fancychat.config.fancychat.FancyChannel;
 import com.earth2me.essentials.api.ESAPIUtil;
@@ -19,8 +19,9 @@ public class IgnoreUtil {
     private static boolean essentialsEnabled = false;
     public static void initialize(){
 
-        if (essentialsEnabled = Bukkit.getPluginManager().isPluginEnabled("Essentials")){
-            EverNifeFancyChat.info("[Essentials Found] Utilizando ESS-Ignore System");
+        essentialsEnabled = Bukkit.getPluginManager().isPluginEnabled("Essentials");
+        if (essentialsEnabled){
+            FancyChat.info("[Essentials Found] Utilizando ESS-Ignore System");
             return;
         }
 
@@ -37,11 +38,16 @@ public class IgnoreUtil {
     }
 
     public static boolean isIgnoring(Player player, Player otherPlayer){
-        if (essentialsEnabled){
-            return ESAPIUtil.isIgnoring(player,otherPlayer);
-        }else {
-            return isIgnoring(player.getName(),otherPlayer.getName());
+        try {
+            if (essentialsEnabled){
+                return ESAPIUtil.isIgnoring(player,otherPlayer);
+            }else {
+                return isIgnoring(player.getName(),otherPlayer.getName());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+        return false;
     }
 
     public static boolean isIgnoring(String playerName, String otherPlayerName){

@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.commands;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.config.ConfigManager;
@@ -29,10 +29,6 @@ public class CoreCommand implements CommandExecutor {
                 return help(label,sender,argumentos);
             case "spy":
                 return spy(label,sender,argumentos);
-            case "ignore":
-                return ignore(label,sender,argumentos);
-            case "ignorelist":
-                return ignorelist(label,sender,argumentos);
             case "reload":
                 return reload(label,sender,argumentos);
 
@@ -63,27 +59,6 @@ public class CoreCommand implements CommandExecutor {
         return true;
     }
 
-    // -----------------------------------------------------------------------------------------------------------------------------//
-    // Command Ignoire
-    // -----------------------------------------------------------------------------------------------------------------------------//
-    public static boolean ignore(String label, CommandSender sender, List<String> argumentos){
-
-        sender.sendMessage("§cUse o comando /ignore");
-        return true;
-    }
-
-    // -----------------------------------------------------------------------------------------------------------------------------//
-    // Command IgnoreList
-    // -----------------------------------------------------------------------------------------------------------------------------//
-    public static boolean ignorelist(String label, CommandSender sender, List<String> argumentos){
-
-        if ( !FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandSpy)){
-            return true;
-        }
-
-        sender.sendMessage("§cUse o comando /ignore");
-        return true;
-    }
 
     // -----------------------------------------------------------------------------------------------------------------------------//
     // Command Spy
@@ -146,11 +121,11 @@ public class CoreCommand implements CommandExecutor {
     // -----------------------------------------------------------------------------------------------------------------------------//
     public static boolean reload(String label, CommandSender sender, List<String> argumentos){
 
-        if ( !FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandReload)){
+        if (!FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandReload)){
             return true;
         }
 
-        ConfigManager.initialize(EverNifeFancyChat.instance);
+        ConfigManager.initialize(FancyChat.instance);
 
         sender.sendMessage("§aFancyChat foi recarregado!!!");
         return true;

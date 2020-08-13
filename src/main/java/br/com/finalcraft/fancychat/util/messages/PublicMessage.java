@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.util.messages;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.api.FancyChatSendChannelMessageEvent;
@@ -24,7 +24,7 @@ public class PublicMessage {
     public static void sendPublicMessage(Player player, FancyChannel channel, String msg){
 
         if (MuteUtil.isMuted(player)){
-            player.sendMessage("§6§l ▶ Você está mutado");
+            player.sendMessage("§6§l ▶ Você está mutado!");
             player.sendMessage(MuteUtil.getMuteMessage(player));
             return;
         }
@@ -49,7 +49,7 @@ public class PublicMessage {
             if (!fancyTag.getPlaceholderCondition().isEmpty()){
                 String[] placeholderToCondition = fancyTag.getPlaceholderCondition().split("|");
                 if (placeholderToCondition.length != 2){
-                    EverNifeFancyChat.info("Error parsing placeholderToCondition [" + fancyTag.getPlaceholderCondition() + "] from tag [" + fancyTag.getName() + "] and channel [" + channel.getName() + "]" );
+                    FancyChat.info("Error parsing placeholderToCondition [" + fancyTag.getPlaceholderCondition() + "] from tag [" + fancyTag.getName() + "] and channel [" + channel.getName() + "]" );
                     continue;
                 }
                 if (!PlaceHolderIntegration.parsePlaceholder(placeholderToCondition[0],player).equalsIgnoreCase(PlaceHolderIntegration.parsePlaceholder(placeholderToCondition[1],player))){
@@ -109,7 +109,7 @@ public class PublicMessage {
                     }
                 }
             }
-        }.runTask(EverNifeFancyChat.instance);
+        }.runTask(FancyChat.instance);
     }
 
     public static void doTheDeploy(final List<FancyText> textChatList, Player player, Player onlinePlayerToSendMessage, int finalIdOfMSGText){

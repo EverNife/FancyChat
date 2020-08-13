@@ -44,7 +44,11 @@ public class ConfigManager {
         FancyChannel.initialize();                  //Ler Canais
         ChannelManager.refresh();                   //Carregar ChannelManager
         MuteUtil.initialize();                      //Carregar mutes e tempmutes
-        IgnoreUtil.initialize();                    //Carregar ignores
+        try {
+            IgnoreUtil.initialize();                //Carregar ignores
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         AliaseRegister.registerChannelAliases();    //Registrar os atalhos para os canais, /g /l etc
     }
 

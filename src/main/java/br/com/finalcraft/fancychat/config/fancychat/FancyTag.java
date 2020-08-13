@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.config.fancychat;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.ChatColor;
@@ -30,11 +30,11 @@ public class FancyTag {
                 FancyTag fancyTag = new FancyTag(fancyTagName);
                 mapOfFancyTags.put(fancyTagName,fancyTag);
             }catch (Exception e){
-                EverNifeFancyChat.info("Error trying to read " + fancyTagName + " FancyTag : " + e.getMessage());
+                FancyChat.info("Error trying to read " + fancyTagName + " FancyTag : " + e.getMessage());
             }
         }
 
-        EverNifeFancyChat.info("§aFinished Loading " + mapOfFancyTags.size() + " FancyTags!");
+        FancyChat.info("§aFinished Loading " + mapOfFancyTags.size() + " FancyTags!");
     }
 
     public FancyTag(String name){

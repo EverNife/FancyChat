@@ -16,7 +16,7 @@ public class PlaceHolderIntegration{
         return PlaceholderAPI.setPlaceholders(player,text);
     }
 
-    public static void initialize(JavaPlugin plugin){
+    public static void initialize(){
         hasPlaceholderApi = true;
     }
 

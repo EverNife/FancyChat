@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.config.fancychat;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.ChatColor;
@@ -20,7 +20,7 @@ public class TellTag {
 
     public static void initialize(){
         TELL_TAG = new TellTag();
-        EverNifeFancyChat.info("§aFinished Loading TellTag!");
+        FancyChat.info("§aFinished Loading TellTag!");
     }
 
     public TellTag(){

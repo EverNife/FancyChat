@@ -9,12 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 public class FactionsParser extends ThirdPartTagsParser {
 
-    private static boolean isHooked = false;
     public static void initialize(){
-        if (!isHooked){
-            isHooked = true;
-            addThirdPartTagsParser(new FactionsParser());
-        }
+        addThirdPartTagsParser(new FactionsParser());
     }
 
     @Override

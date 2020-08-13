@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.config.customtag;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 
 import java.util.Collection;
@@ -22,7 +22,7 @@ public class CustomTag {
             mapOfCustomTag.put(customTagName,customTag);
         }
 
-        EverNifeFancyChat.info("§aFinished Loading " + mapOfCustomTag.size() + " CustomTags!");
+        FancyChat.info("§aFinished Loading " + mapOfCustomTag.size() + " CustomTags!");
     }
 
     public static Collection<CustomTag> getAllCustomtags(){

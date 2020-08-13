@@ -11,7 +11,11 @@ import java.util.Map;
 
 public class MuteUtil {
 
-    public static boolean globalMute;
+    public static boolean globalMute = false;
+
+    public static boolean toggleGlobalMute(boolean value){
+        return (globalMute = value);
+    }
 
     String playerName;
     long start;
@@ -30,8 +34,8 @@ public class MuteUtil {
             return false;
         }
 
-        if (globalMute && sender.hasPermission(PermissionNodes.chatStaff)){
-            return true;
+        if (globalMute){
+            return sender.hasPermission(PermissionNodes.chatStaff);
         }
 
         MuteUtil muteUtil = mapOfMutes.getOrDefault(sender.getName(),null);
@@ -60,8 +64,9 @@ public class MuteUtil {
             return "";
         }
 
+
         if (globalMute && !sender.hasPermission(PermissionNodes.chatStaff)){
-            return "§c§l   (GlobalMute está ativado)";
+            return "§c  §l(GlobalMute está ativado!)";
         }
 
         MuteUtil muteUtil = mapOfMutes.getOrDefault(sender.getName(),null);

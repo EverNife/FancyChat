@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.config.fancychat;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 import org.bukkit.entity.Player;
 
@@ -44,10 +44,10 @@ public class FancyChannel {
         }
 
         if (GLOBAL_CHANNEL == null || DEFAULT_CHANNEL == null){
-            EverNifeFancyChat.info("[WARNING] Meu consagrado, você setou um canal default/global que não existe!");
+            FancyChat.info("[WARNING] Meu consagrado, você setou um canal default/global que não existe!");
         }
 
-        EverNifeFancyChat.info("§aFinished Loading " + mapOfFancyChannels.size() + " FancyChannels!");
+        FancyChat.info("§aFinished Loading " + mapOfFancyChannels.size() + " FancyChannels!");
     }
 
     public FancyChannel(String name){
@@ -60,7 +60,7 @@ public class FancyChannel {
         for (String tagName : tag_builder.split(",")){
             FancyTag fancyTag = FancyTag.mapOfFancyTags.getOrDefault(tagName,null);
             if (fancyTag == null){
-                EverNifeFancyChat.info("I was building the channels and found out that there is no \"" + tagName + "\" FancyTag.");
+                FancyChat.info("I was building the channels and found out that there is no \"" + tagName + "\" FancyTag.");
             }else {
                 tagsFromThisBuilder.add(fancyTag);
             }

@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.commands.alias;
 
-import br.com.finalcraft.fancychat.EverNifeFancyChat;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.commands.CommandRegisterer;
 import br.com.finalcraft.fancychat.config.fancychat.FancyChannel;
 import org.bukkit.Bukkit;
@@ -29,7 +29,7 @@ public class AliaseRegister {
     public static void registerChannelAlise(String name, List<String> aliases, boolean shouldReg, CommandExecutor executor) {
         List<String> aliases1 = new ArrayList<>(aliases);
 
-        for (Command cmd: PluginCommandYamlParser.parse(EverNifeFancyChat.instance)){
+        for (Command cmd: PluginCommandYamlParser.parse(FancyChat.instance)){
             if (cmd.getName().equals(name)){
                 if (shouldReg){
                     Bukkit.getServer().getPluginCommand(name).setExecutor(executor);

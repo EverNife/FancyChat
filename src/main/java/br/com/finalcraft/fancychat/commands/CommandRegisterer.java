@@ -11,7 +11,7 @@ public class CommandRegisterer {
         pluginInstance.getCommand("chat").setExecutor(new CoreCommand());
         pluginInstance.getCommand("tell").setExecutor(new CMDTell());
         pluginInstance.getCommand("channellock").setExecutor(new CMDChannelLock());
-        pluginInstance.getCommand("mute").setExecutor(new CMDMute());
+        pluginInstance.getCommand("muteall").setExecutor(new CMDMuteAll());
         pluginInstance.getCommand("broadcast").setExecutor(new CMDBroadcast());
         pluginInstance.getCommand("fancymessage").setExecutor(new CMDFancyMessage());
     }

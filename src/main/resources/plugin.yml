@@ -1,8 +1,8 @@
-name: EverNifeFancyChat
+name: FancyChat
 version: 1.0.4
 author: EverNife
-main: br.com.finalcraft.fancychat.EverNifeFancyChat
-softdepend: [ PlaceholderAPI, Factions ]
+main: br.com.finalcraft.fancychat.FancyChat
+softdepend: [ PlaceholderAPI, Factions, Essentials ]
 
 commands:
   chat:
@@ -24,10 +24,9 @@ commands:
   inchannel:
     description: EverNifeFancyChat InChannel Command
     usage: /<command>
-  mute:
+  muteall:
     description: EverNifeFancyChat Mute Command
     usage: /<command>
-    aliases: [tempmute,chatmute,silence]
   broadcast:
     description: EverNifeFancyChat broadcast Command
     usage: /<command>

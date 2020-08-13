@@ -20,7 +20,7 @@ public class CMDTell implements CommandExecutor {
     // -----------------------------------------------------------------------------------------------------------------------------//
     // Command Tell
     // -----------------------------------------------------------------------------------------------------------------------------//
-    public static boolean tell(String label, CommandSender sender, String[] args){
+    public boolean tell(String label, CommandSender sender, String[] args){
 
         if (MuteUtil.isMuted(sender)){
             sender.sendMessage("§cVocê está mutado!");
@@ -35,8 +35,18 @@ public class CMDTell implements CommandExecutor {
 
         Player target = null;
         boolean firstArgWasAPerson = false;
+        boolean firstArgCanBePerson = false;
+        switch (label){
+            case "r":
+                firstArgCanBePerson = false;
+                break;
+        }
+
         if (args.length >= 1){
-            Player possibleTarget = Bukkit.getPlayer(args[0]);
+            Player possibleTarget = null;
+            if (firstArgCanBePerson){
+                possibleTarget = Bukkit.getPlayer(args[0]);
+            }
             if (possibleTarget != null){
                 target = possibleTarget;
                 firstArgWasAPerson = true;
@@ -52,8 +62,6 @@ public class CMDTell implements CommandExecutor {
             sender.sendMessage("§6§l ▶ §cJogador " + args[0] + " não encontrado!");
             return true;
         }
-
-
 
         StringBuilder msgBuilder = new StringBuilder();
         if (!firstArgWasAPerson){

@@ -20,8 +20,10 @@ public class PrivateMessage {
             sender.sendMessage(FancyChatLang.getLang("listener.invalidplayer"));
             return;
         }
-        tellHistory.put(sender.getName(),receiver.getName());
-        tellHistory.put(receiver.getName(),sender.getName());
+        synchronized (tellHistory){
+            tellHistory.put(sender.getName(), receiver.getName());
+            tellHistory.put(receiver.getName(), sender.getName());
+        }
 
         FancyText fancyTextSender   = TellTag.TELL_TAG.getFancyTextSender().parsePlaceholdersAndClone(sender);
         FancyText fancyTextReceiver = TellTag.TELL_TAG.getFancyTextReceiver().parsePlaceholdersAndClone(sender);
@@ -46,6 +48,8 @@ public class PrivateMessage {
 
 
     public static String getLastTarget(String source){
-        return tellHistory.getOrDefault(source,null);
+        synchronized (tellHistory){
+            return tellHistory.getOrDefault(source,null);
+        }
     }
 }
