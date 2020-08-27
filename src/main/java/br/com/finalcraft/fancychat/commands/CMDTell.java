@@ -35,7 +35,7 @@ public class CMDTell implements CommandExecutor {
 
         Player target = null;
         boolean firstArgWasAPerson = false;
-        boolean firstArgCanBePerson = false;
+        boolean firstArgCanBePerson = true;
         switch (label){
             case "r":
                 firstArgCanBePerson = false;

@@ -108,6 +108,7 @@ public class PublicMessage {
                         SpyMessage.spyOnThis(textChatList, playerThatHeardedThis);
                     }
                 }
+                FancyChat.chatLog(FancyText.textOnlyTextBuilder(textChatList));
             }
         }.runTask(FancyChat.instance);
     }
