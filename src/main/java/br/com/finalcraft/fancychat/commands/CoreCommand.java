@@ -108,7 +108,7 @@ public class CoreCommand implements CommandExecutor {
                 }
                 String color = argumentos.get(2).isEmpty() ? "§7" : ChatColor.translateAlternateColorCodes('&',argumentos.get(2));
                 SpyMessage.changeSpyState(player, color,true);
-                sender.sendMessage("§6§l ▶ §aCor do ChatSpy alterado para: " + color + argumentos.get(2) + ")");
+                sender.sendMessage("§6§l ▶ §aCor do ChatSpy alterado para: " + color + argumentos.get(2));
                 return true;
         }
         sender.sendMessage("§6§l ▶ §aParâmetro inválido...");

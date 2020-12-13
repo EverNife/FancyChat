@@ -80,7 +80,7 @@ public class PublicMessage {
                     for (Player onlinePlayerToSendMessage : channel.getPlayersOnThisChannel()) {
                         if (!IgnoreUtil.isIgnoring(onlinePlayerToSendMessage, player)){
 
-                            //Entregando mensage ao jogador!
+                            //Entregando mensagem ao jogador!
                             doTheDeploy(textChatList,player,onlinePlayerToSendMessage,finalIdOfMSGText);
 
                         }

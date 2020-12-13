@@ -5,13 +5,11 @@ import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SpyMessage {
 
-    private static Map<Player,String> spyingPlayers = new HashMap<>();
+    private static Map<Player,String> spyingPlayers = new HashMap<>(); //Player - Color
 
     /**
      *
@@ -19,12 +17,8 @@ public class SpyMessage {
      * @return <tt>false</tt> if this player has benn removed from the SpyList
      */
     public static void changeSpyState(Player player, String color, boolean state){
-        if (state == false && isSpying(player)){
-            spyingPlayers.remove(player);
-            return;
-        }
+        spyingPlayers.remove(player);
         if (state == true){
-            spyingPlayers.remove(player);
             spyingPlayers.put(player, color);
         }
     }
@@ -38,9 +32,12 @@ public class SpyMessage {
             return;
         }
 
+        HashSet<UUID> allPlayerWhoHeardUUIDs = new HashSet();
+
         StringBuilder allPlayerWhoHeardString = new StringBuilder();
         for (Player player : allPlayerWhoHeard){
             allPlayerWhoHeardString.append("\n  - " + player.getName());
+            allPlayerWhoHeardUUIDs.add(player.getUniqueId());
         }
 
         msg.forEach(fancyText -> {
@@ -55,16 +52,16 @@ public class SpyMessage {
         }
 
         FancyChat.chatLog(FancyText.textOnlyTextBuilder(msg));
-        for (Map.Entry<Player, String> playerStringEntry : spyingPlayers.entrySet()) {
-            if (playerStringEntry.getKey().isOnline()){
-                if (!allPlayerWhoHeard.contains(playerStringEntry.getKey())){
-                    if (!previousColor.equalsIgnoreCase(playerStringEntry.getValue())){
-                        previousColor = playerStringEntry.getValue();
+        for (Map.Entry<Player, String> entry : spyingPlayers.entrySet()) {
+            if (entry.getKey().isOnline()){
+                if (!allPlayerWhoHeardUUIDs.contains(entry.getKey().getUniqueId())){
+                    if (!previousColor.equalsIgnoreCase(entry.getValue())){
+                        previousColor = entry.getValue();
                         for (FancyText fancyText : msg) {
                             fancyText.setText(previousColor + ChatColor.stripColor(fancyText.text));
                         }
                     }
-                    FancyText.sendTo(playerStringEntry.getKey(),msg);
+                    FancyText.sendTo(entry.getKey(),msg);
                 }
             }
         }
