@@ -60,7 +60,7 @@ public class FancyChat extends JavaPlugin{
                     FactionsParser.initialize();
                 }
 
-                if (Bukkit.getPluginManager().isPluginEnabled("EverNifeBetterClans")){
+                if (Bukkit.getPluginManager().isPluginEnabled("BetterClans")){
                     info("&aIntegration to BetterClans");
                     BetterClansParser.initialize();
                 }
