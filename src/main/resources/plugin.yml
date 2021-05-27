@@ -2,6 +2,7 @@ name: FancyChat
 version: 1.0.4
 author: EverNife
 main: br.com.finalcraft.fancychat.FancyChat
+depend: [ EverNifeCore ]
 softdepend: [ PlaceholderAPI, Factions, Essentials ]
 
 commands:
