@@ -29,7 +29,7 @@ dependencies {
     compile name: "PlaceholderAPI"
     compile name: "MambaFactions"
     compile name: "MambaMassiveCore"
-    compile name: "EverNifeBetterClans-1.0.1a"
+    compile name: "BetterClans-1.0.1a"
     compile name: "EverNifeDeciPlugin-1.2.1a"
     compile 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
     testCompile group: 'junit', name: 'junit', version: '4.12'
