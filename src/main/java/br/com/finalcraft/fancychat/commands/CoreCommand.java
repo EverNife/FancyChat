@@ -1,7 +1,7 @@
 package br.com.finalcraft.fancychat.commands;
 
-import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 import br.com.finalcraft.fancychat.fancytextchat.FancyText;

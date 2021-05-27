@@ -1,8 +1,8 @@
 package br.com.finalcraft.fancychat.commands;
 
 
-import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
+import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.fancychat.FancyChannel;
 import br.com.finalcraft.fancychat.util.ChannelManager;
 import org.bukkit.Bukkit;

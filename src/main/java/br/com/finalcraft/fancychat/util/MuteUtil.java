@@ -1,8 +1,8 @@
 package br.com.finalcraft.fancychat.util;
 
+import br.com.finalcraft.evernifecore.cooldown.FCTimeFrame;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.config.ConfigManager;
-import br.com.finalcraft.fancychat.cooldown.FCTimeFrame;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 

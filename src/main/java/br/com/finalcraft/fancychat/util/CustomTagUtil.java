@@ -4,7 +4,9 @@ import br.com.finalcraft.fancychat.config.ConfigManager;
 import br.com.finalcraft.fancychat.config.customtag.CustomTag;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class CustomTagUtil {
 

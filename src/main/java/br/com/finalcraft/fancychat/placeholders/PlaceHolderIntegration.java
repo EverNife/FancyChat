@@ -3,7 +3,6 @@ package br.com.finalcraft.fancychat.placeholders;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class PlaceHolderIntegration{
 

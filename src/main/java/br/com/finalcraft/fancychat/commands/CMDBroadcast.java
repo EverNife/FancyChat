@@ -3,7 +3,7 @@ package br.com.finalcraft.fancychat.commands;
 
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;;
+import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
