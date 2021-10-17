@@ -1,13 +1,14 @@
 package br.com.finalcraft.fancychat.util.messages;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.api.FancyChatSendChannelMessageEvent;
 import br.com.finalcraft.fancychat.config.fancychat.FancyChannel;
 import br.com.finalcraft.fancychat.config.fancychat.FancyTag;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import br.com.finalcraft.fancychat.placeholders.PlaceHolderIntegration;
+import br.com.finalcraft.fancychat.util.FancyTextUtil;
 import br.com.finalcraft.fancychat.util.IgnoreUtil;
 import br.com.finalcraft.fancychat.util.MuteUtil;
 import org.bukkit.Bukkit;
@@ -57,12 +58,11 @@ public class PublicMessage {
                 }
 
             }
-            FancyText fancyText = fancyTag.getFancyText().parsePlaceholdersAndClone(player);
-            fancyText.text = fancyText.text.replace("{player}",player.getName());
-            String replacedText = fancyText.text.replace("{msg}",msg);
-            if (!replacedText.equals(fancyText.text)){
-                fancyText.text = replacedText;
-                fancyText.containsMSG = true;
+            FancyText fancyText = FancyTextUtil.parsePlaceholdersAndClone(fancyTag.getFancyText(),player);
+            fancyText.setText(fancyText.getText().replace("{player}",player.getName()));
+            String replacedText = fancyText.getText().replace("{msg}",msg);
+            if (!replacedText.equals(fancyText.getText())){
+                fancyText.setText(replacedText);
                 idOfMSGText = contador;
             }
             contador++;
@@ -108,7 +108,7 @@ public class PublicMessage {
                         SpyMessage.spyOnThis(textChatList, playerThatHeardedThis);
                     }
                 }
-                FancyChat.chatLog(FancyText.textOnlyTextBuilder(textChatList));
+                FancyChat.chatLog(FancyTextUtil.textOnly(textChatList));
             }
         }.runTask(FancyChat.instance);
     }
@@ -116,19 +116,19 @@ public class PublicMessage {
     public static void doTheDeploy(final List<FancyText> textChatList, Player player, Player onlinePlayerToSendMessage, int finalIdOfMSGText){
         FancyText fancyTextContainingMessage = textChatList.get(finalIdOfMSGText);
 
-        String[] array = fancyTextContainingMessage.text.split("(?i)" + onlinePlayerToSendMessage.getName()); // splits case insensitive
+        String[] array = fancyTextContainingMessage.getText().split("(?i)" + onlinePlayerToSendMessage.getName()); // splits case insensitive
         if (array.length > 1){
             List<FancyText> textToSend = new ArrayList<FancyText>();
             textToSend.addAll(textChatList.subList(0,finalIdOfMSGText));
 
             FancyText fancyTextPart1 = fancyTextContainingMessage.clone();
-            fancyTextPart1.text = array[0];
+            fancyTextPart1.setText(array[0]);
             fancyTextPart1.setRecentChanged();
 
             FancyText fancyTextPart2 = new FancyText("§6 @" + onlinePlayerToSendMessage.getName() + ChatColor.getLastColors(array[0])).setHoverText("§aO jogador " + player.getName() + " marcou você!");
 
             FancyText fancyTextPart3 = fancyTextContainingMessage.clone();
-            fancyTextPart3.text = array[1];
+            fancyTextPart3.setText(array[1]);
             fancyTextPart3.setRecentChanged();
 
             textToSend.add(fancyTextPart1);

@@ -1,7 +1,8 @@
 package br.com.finalcraft.fancychat.util.messages;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FancyChat;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
+import br.com.finalcraft.fancychat.util.FancyTextUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -41,24 +42,24 @@ public class SpyMessage {
         }
 
         msg.forEach(fancyText -> {
-            fancyText.setText("§7" + ChatColor.stripColor(fancyText.text));
+            fancyText.setText("§7" + ChatColor.stripColor(fancyText.getText()));
             fancyText.setHoverText("Jogadores que escutaram essa mensagem: \n " + allPlayerWhoHeardString);
         });
 
 
         String previousColor = "§7";
         for (FancyText fancyText : msg) {
-            fancyText.setText(previousColor + ChatColor.stripColor(fancyText.text));
+            fancyText.setText(previousColor + ChatColor.stripColor(fancyText.getText()));
         }
 
-        FancyChat.chatLog(FancyText.textOnlyTextBuilder(msg));
+        FancyChat.chatLog(FancyTextUtil.textOnly(msg));
         for (Map.Entry<Player, String> entry : spyingPlayers.entrySet()) {
             if (entry.getKey().isOnline()){
                 if (!allPlayerWhoHeardUUIDs.contains(entry.getKey().getUniqueId())){
                     if (!previousColor.equalsIgnoreCase(entry.getValue())){
                         previousColor = entry.getValue();
                         for (FancyText fancyText : msg) {
-                            fancyText.setText(previousColor + ChatColor.stripColor(fancyText.text));
+                            fancyText.setText(previousColor + ChatColor.stripColor(fancyText.getText()));
                         }
                     }
                     FancyText.sendTo(entry.getKey(),msg);

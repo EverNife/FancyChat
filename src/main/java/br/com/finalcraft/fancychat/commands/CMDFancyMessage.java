@@ -1,9 +1,9 @@
 package br.com.finalcraft.fancychat.commands;
 
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,7 +24,6 @@ public class CMDFancyMessage implements CommandExecutor {
             }
         }
 
-
         if (args.length <= 1){
             sender.sendMessage("§6§l ▶ §e/" + label + " <Player> <msg>");
             return true;
@@ -44,7 +43,7 @@ public class CMDFancyMessage implements CommandExecutor {
 
         String msg = stringBuilder.toString().trim();
         FancyText fancyText = new FancyText(ChatColor.translateAlternateColorCodes('&',msg));
-        FancyText.sendTo(target,fancyText);
+        fancyText.send(target);
         return true;
     }
 }

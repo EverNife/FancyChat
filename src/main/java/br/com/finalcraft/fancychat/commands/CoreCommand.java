@@ -1,10 +1,10 @@
 package br.com.finalcraft.fancychat.commands;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.config.ConfigManager;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import br.com.finalcraft.fancychat.util.messages.SpyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -45,11 +45,28 @@ public class CoreCommand implements CommandExecutor {
         sender.sendMessage("§6§m--------------------§6(  §a§lFancyChat§e  §6)§m--------------------");
         if (sender instanceof Player){
             Player player = (Player) sender;
-            FancyText.sendTo(player, new FancyText("§3§l ▶ §a/" + label + " ignore <Player>","§bIgnora as mensagens de um jogador específico!").setSuggestCommandAction("/" + label + " ignore "));
-            FancyText.sendTo(player, new FancyText("§3§l ▶ §a/" + label + " ignoredList","§bMostra todos os jogadores que você está ignorando!").setRunCommandActionText("/" + label + " ignoreList"));
+            FancyText.of("§3§l ▶ §a/" + label + " ignore <Player>")
+                    .setHoverText("§bIgnora as mensagens de um jogador específico!")
+                    .setSuggestCommandAction("/" + label + " ignore")
+                    .send(player);
 
-            if (player.hasPermission(PermissionNodes.commandSpy)) FancyText.sendTo(player, new FancyText("§3§l ▶ §e/" + label + " spy [colorCode]","§bMostra todas as conversas do servidor. \n   Você pode usar a cor que quiser.","/" + label + " spy"));
-            if (player.hasPermission(PermissionNodes.commandReload)) FancyText.sendTo(player, new FancyText("§3§l ▶ §a/" + label + " reload","§bRecarrega todas as configurações do Plugin!","/" + label + " reload"));
+            FancyText.of("§3§l ▶ §a/" + label + " ignoredList")
+                    .setHoverText("§bMostra todos os jogadores que você está ignorando!")
+                    .setRunCommandAction("/" + label + " ignoreList")
+                    .send(player);
+
+            if (player.hasPermission(PermissionNodes.commandSpy)) {
+                FancyText.of("§3§l ▶ §e/" + label + " spy [colorCode]")
+                        .setHoverText("§bMostra todas as conversas do servidor. \n   Você pode usar a cor que quiser.")
+                        .setRunCommandAction("/" + label + " spy")
+                        .send(player);
+            }
+            if (player.hasPermission(PermissionNodes.commandReload)){
+                FancyText.of("§3§l ▶ §a/" + label + " reload")
+                        .setHoverText("§bRecarrega todas as configurações do Plugin!")
+                        .setRunCommandAction("/" + label + " reload")
+                        .send(player);
+            }
             sender.sendMessage("");
             sender.sendMessage("§3§oPasse o mouse em cima dos comandos para ver a descrição!");
         }else {

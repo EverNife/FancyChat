@@ -1,6 +1,6 @@
 package br.com.finalcraft.fancychat.config.fancychat;
 
-import br.com.finalcraft.evernifecore.commands.finalcmd.FinalCMD;
+import br.com.finalcraft.evernifecore.commands.finalcmd.FinalCMDManager;
 import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
 import org.bukkit.entity.Player;
@@ -30,7 +30,7 @@ public class FancyChannel {
     public static void initialize(){
 
         for (FancyChannel oldChannel : mapOfFancyChannels.values()) {
-            FinalCMD.unregisterCommand(oldChannel.getAlias());
+            FinalCMDManager.unregisterCommand(oldChannel.getAlias());
         }
 
         mapOfFancyChannels.clear();

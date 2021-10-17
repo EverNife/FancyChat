@@ -3,8 +3,6 @@ package br.com.finalcraft.fancychat;
 import br.com.finalcraft.evernifecore.version.MCVersion;
 import br.com.finalcraft.fancychat.commands.CommandRegisterer;
 import br.com.finalcraft.fancychat.config.ConfigManager;
-import br.com.finalcraft.fancychat.integration.builtin.BetterClansParser;
-import br.com.finalcraft.fancychat.integration.builtin.DeciPluginParser;
 import br.com.finalcraft.fancychat.integration.builtin.DefaultParser;
 import br.com.finalcraft.fancychat.integration.builtin.FactionsParser;
 import br.com.finalcraft.fancychat.listener.FancyChatListener;
@@ -58,16 +56,6 @@ public class FancyChat extends JavaPlugin{
                 if (Bukkit.getPluginManager().isPluginEnabled("Factions")){
                     info("&aIntegration to Factions");
                     FactionsParser.initialize();
-                }
-
-                if (Bukkit.getPluginManager().isPluginEnabled("BetterClans")){
-                    info("&aIntegration to BetterClans");
-                    BetterClansParser.initialize();
-                }
-
-                if (Bukkit.getPluginManager().isPluginEnabled("EverNifeDeciPlugin")){
-                    info("&aIntegration to DeciPlugin");
-                    DeciPluginParser.initialize();
                 }
             }
         }.runTaskLater(instance,1);

@@ -1,8 +1,8 @@
 package br.com.finalcraft.fancychat.config.fancychat;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;
@@ -61,7 +61,7 @@ public class FancyTag {
 
         fancyText = new FancyText(format);
         if (!this.hover_message.isEmpty()) fancyText.setHoverText(hover_message);
-        if (!this.run_command.isEmpty()) fancyText.setRunCommandActionText(run_command);
+        if (!this.run_command.isEmpty()) fancyText.setRunCommandAction(run_command);
         if (!this.suggest_command.isEmpty()) fancyText.setSuggestCommandAction(suggest_command);
     }
 

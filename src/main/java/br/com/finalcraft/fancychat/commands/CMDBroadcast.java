@@ -1,13 +1,15 @@
 package br.com.finalcraft.fancychat.commands;
 
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CMDBroadcast implements CommandExecutor {
 
@@ -20,7 +22,8 @@ public class CMDBroadcast implements CommandExecutor {
 
         String msg = String.join(" ", args).trim();
         FancyText fancyText = new FancyText(ChatColor.translateAlternateColorCodes('&',msg));
-        FancyText.tellRawBroadcast(fancyText);
+        Player[] allOnlinePlayers = Bukkit.getOnlinePlayers().toArray(new Player[0]);
+        fancyText.send(allOnlinePlayers);
         return true;
     }
 }

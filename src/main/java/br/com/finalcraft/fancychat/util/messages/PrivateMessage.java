@@ -1,8 +1,9 @@
 package br.com.finalcraft.fancychat.util.messages;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.config.fancychat.TellTag;
 import br.com.finalcraft.fancychat.config.lang.FancyChatLang;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
+import br.com.finalcraft.fancychat.util.FancyTextUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -25,11 +26,11 @@ public class PrivateMessage {
             tellHistory.put(receiver.getName(), sender.getName());
         }
 
-        FancyText fancyTextSender   = TellTag.TELL_TAG.getFancyTextSender().parsePlaceholdersAndClone(sender);
-        FancyText fancyTextReceiver = TellTag.TELL_TAG.getFancyTextReceiver().parsePlaceholdersAndClone(sender);
+        FancyText fancyTextSender   = FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextSender(), sender);
+        FancyText fancyTextReceiver = FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextReceiver(), sender);
 
-        fancyTextSender.text = fancyTextSender.text.replace("{sender}",sender.getName()).replace("{receiver}",receiver.getName());
-        fancyTextReceiver.text = fancyTextReceiver.text.replace("{sender}",sender.getName()).replace("{receiver}",receiver.getName());
+        fancyTextSender.setText(fancyTextSender.getText().replace("{sender}",sender.getName()).replace("{receiver}",receiver.getName()));
+        fancyTextReceiver.setText(fancyTextReceiver.getText().replace("{sender}",sender.getName()).replace("{receiver}",receiver.getName()));
 
         if (sender.hasPermission("fancychat.color")){
             msg = ChatColor.translateAlternateColorCodes('&', msg);
