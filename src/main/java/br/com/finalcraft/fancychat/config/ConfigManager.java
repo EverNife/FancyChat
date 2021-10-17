@@ -1,5 +1,6 @@
 package br.com.finalcraft.fancychat.config;
 
+import br.com.finalcraft.evernifecore.config.Config;
 import br.com.finalcraft.fancychat.commands.alias.AliaseRegister;
 import br.com.finalcraft.fancychat.config.fancychat.FancyChannel;
 import br.com.finalcraft.fancychat.config.fancychat.FancyTag;

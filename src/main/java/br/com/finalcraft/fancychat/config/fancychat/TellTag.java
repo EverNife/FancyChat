@@ -1,8 +1,8 @@
 package br.com.finalcraft.fancychat.config.fancychat;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.config.ConfigManager;
-import br.com.finalcraft.fancychat.fancytextchat.FancyText;
 import org.bukkit.ChatColor;
 
 public class TellTag {
