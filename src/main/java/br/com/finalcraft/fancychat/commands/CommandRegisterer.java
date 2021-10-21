@@ -1,5 +1,6 @@
 package br.com.finalcraft.fancychat.commands;
 
+import br.com.finalcraft.evernifecore.commands.finalcmd.FinalCMDManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommandRegisterer {
@@ -12,7 +13,7 @@ public class CommandRegisterer {
         pluginInstance.getCommand("tell").setExecutor(new CMDTell());
         pluginInstance.getCommand("channellock").setExecutor(new CMDChannelLock());
         pluginInstance.getCommand("muteall").setExecutor(new CMDMuteAll());
-        pluginInstance.getCommand("broadcast").setExecutor(new CMDBroadcast());
+        FinalCMDManager.registerCommand(pluginInstance, CMDBroadcast.class);
         pluginInstance.getCommand("fancymessage").setExecutor(new CMDFancyMessage());
     }
 

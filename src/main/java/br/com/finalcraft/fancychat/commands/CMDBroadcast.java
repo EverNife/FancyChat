@@ -1,29 +1,30 @@
 package br.com.finalcraft.fancychat.commands;
 
 
+import br.com.finalcraft.evernifecore.argumento.MultiArgumentos;
+import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
+import br.com.finalcraft.evernifecore.commands.finalcmd.help.HelpLine;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
-import br.com.finalcraft.fancychat.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
-public class CMDBroadcast implements CommandExecutor {
+public class CMDBroadcast {
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    @FinalCMD(
+            aliases = {"fcbroadcast","broadcast"},
+            usage = "<msg>",
+            permission = PermissionNodes.COMMAND_BROADCAST
+    )
+    public void broadcast(CommandSender sender, MultiArgumentos argumentos, HelpLine helpLine) {
 
-        if (!FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandBroadcast)){
-            return true;
+        if (argumentos.emptyArgs(0)) {
+            helpLine.sendTo(sender);
+            return;
         }
 
-        String msg = String.join(" ", args).trim();
-        FancyText fancyText = new FancyText(ChatColor.translateAlternateColorCodes('&',msg));
-        Player[] allOnlinePlayers = Bukkit.getOnlinePlayers().toArray(new Player[0]);
-        fancyText.send(allOnlinePlayers);
-        return true;
+        FancyText.of(
+                ChatColor.translateAlternateColorCodes('&',argumentos.joinStringArgs())
+        ).broadcast();
     }
 }
