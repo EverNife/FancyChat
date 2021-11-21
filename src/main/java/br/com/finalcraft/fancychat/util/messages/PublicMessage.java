@@ -36,7 +36,7 @@ public class PublicMessage {
             return;
         }
 
-        if (player.hasPermission(PermissionNodes.chatColor)){
+        if (player.hasPermission(PermissionNodes.CHAT_COLOR)){
             msg = ChatColor.translateAlternateColorCodes('&', msg);
         }
 
