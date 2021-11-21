@@ -35,7 +35,7 @@ public class MuteUtil {
         }
 
         if (globalMute){
-            return sender.hasPermission(PermissionNodes.chatStaff);
+            return sender.hasPermission(PermissionNodes.MUTE_BYPASS);
         }
 
         MuteUtil muteUtil = mapOfMutes.getOrDefault(sender.getName(),null);
@@ -64,8 +64,7 @@ public class MuteUtil {
             return "";
         }
 
-
-        if (globalMute && !sender.hasPermission(PermissionNodes.chatStaff)){
+        if (globalMute && !sender.hasPermission(PermissionNodes.MUTE_BYPASS)){
             return "§c  §l(GlobalMute está ativado!)";
         }
 

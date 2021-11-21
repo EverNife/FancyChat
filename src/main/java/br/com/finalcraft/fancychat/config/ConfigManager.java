@@ -26,7 +26,6 @@ public class ConfigManager {
     public static Config getDataStore(){
         return dataStore;
     }
-
     public static Config getCustomTags() {
         return customTags;
     }

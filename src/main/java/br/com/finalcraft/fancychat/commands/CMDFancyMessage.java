@@ -19,7 +19,7 @@ public class CMDFancyMessage implements CommandExecutor {
         if (FCBukkitUtil.isNotPlayer(sender)){
             //Console here
         }else {
-            if (!FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandFancyMessage)){
+            if (!FCBukkitUtil.hasThePermission(sender,PermissionNodes.COMMAND_FANCYMESSAGE)){
                 return true;
             }
         }

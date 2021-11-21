@@ -22,7 +22,7 @@ public class CMDMuteAll implements CommandExecutor {
     // -----------------------------------------------------------------------------------------------------------------------------//
     public void mute(String label, CommandSender sender, String[] args){
 
-        if (!FCBukkitUtil.hasThePermission(sender, PermissionNodes.commandMute)){
+        if (!FCBukkitUtil.hasThePermission(sender, PermissionNodes.COMMAND_MUTE)){
             return;
         }
 

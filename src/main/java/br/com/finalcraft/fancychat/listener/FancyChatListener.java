@@ -1,5 +1,6 @@
 package br.com.finalcraft.fancychat.listener;
 
+import br.com.finalcraft.evernifecore.api.events.ECFullyLoggedInEvent;
 import br.com.finalcraft.fancychat.config.fancychat.FancyChannel;
 import br.com.finalcraft.fancychat.util.ChannelManager;
 import br.com.finalcraft.fancychat.util.messages.PublicMessage;
@@ -27,8 +28,8 @@ public class FancyChatListener implements Listener {
 	}
 
 	@EventHandler
-	public void onJoin(PlayerJoinEvent e){
-		ChannelManager.playerJoined(e.getPlayer());
+	public void onJoin(ECFullyLoggedInEvent e){
+		ChannelManager.playerJoined(e.getPlayerData().getPlayer());
 	}
 	
 	@EventHandler

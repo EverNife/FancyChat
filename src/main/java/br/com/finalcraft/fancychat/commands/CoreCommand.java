@@ -55,13 +55,13 @@ public class CoreCommand implements CommandExecutor {
                     .setRunCommandAction("/" + label + " ignoreList")
                     .send(player);
 
-            if (player.hasPermission(PermissionNodes.commandSpy)) {
+            if (player.hasPermission(PermissionNodes.COMMAND_SPY)) {
                 FancyText.of("§3§l ▶ §e/" + label + " spy [colorCode]")
                         .setHoverText("§bMostra todas as conversas do servidor. \n   Você pode usar a cor que quiser.")
                         .setRunCommandAction("/" + label + " spy")
                         .send(player);
             }
-            if (player.hasPermission(PermissionNodes.commandReload)){
+            if (player.hasPermission(PermissionNodes.COMMAND_RELOAD)){
                 FancyText.of("§3§l ▶ §a/" + label + " reload")
                         .setHoverText("§bRecarrega todas as configurações do Plugin!")
                         .setRunCommandAction("/" + label + " reload")
@@ -82,7 +82,7 @@ public class CoreCommand implements CommandExecutor {
     // -----------------------------------------------------------------------------------------------------------------------------//
     public static boolean version(String label, CommandSender sender, List<String> argumentos){
 
-        if ( !FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandSpy)){
+        if ( !FCBukkitUtil.hasThePermission(sender,PermissionNodes.COMMAND_SPY)){
             return true;
         }
 
@@ -100,7 +100,7 @@ public class CoreCommand implements CommandExecutor {
             return true;
         }
 
-        if ( !FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandSpy)){
+        if ( !FCBukkitUtil.hasThePermission(sender,PermissionNodes.COMMAND_SPY)){
             return true;
         }
 
@@ -138,7 +138,7 @@ public class CoreCommand implements CommandExecutor {
     // -----------------------------------------------------------------------------------------------------------------------------//
     public static boolean reload(String label, CommandSender sender, List<String> argumentos){
 
-        if (!FCBukkitUtil.hasThePermission(sender,PermissionNodes.commandReload)){
+        if (!FCBukkitUtil.hasThePermission(sender,PermissionNodes.COMMAND_RELOAD)){
             return true;
         }
 
