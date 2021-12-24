@@ -35,7 +35,7 @@ public class MuteUtil {
         }
 
         if (globalMute){
-            return sender.hasPermission(PermissionNodes.MUTE_BYPASS);
+            return !sender.hasPermission(PermissionNodes.MUTE_BYPASS);
         }
 
         MuteUtil muteUtil = mapOfMutes.getOrDefault(sender.getName(),null);
