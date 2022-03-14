@@ -2,7 +2,7 @@ package br.com.finalcraft.finalchat.config;
 
 import br.com.finalcraft.evernifecore.config.Config;
 import br.com.finalcraft.finalchat.commands.alias.AliaseRegister;
-import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
+import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import br.com.finalcraft.finalchat.config.fancychat.FancyTag;
 import br.com.finalcraft.finalchat.config.fancychat.TellTag;
 import br.com.finalcraft.finalchat.util.ChannelManager;
@@ -41,7 +41,7 @@ public class ConfigManager {
 
         FancyTag.initialize();                      //Ler Tags
         TellTag.initialize();                       //Ler TellTag
-        FancyChannel.initialize();                  //Ler Canais
+        FancyChannelController.initialize();        //Ler Canais
         ChannelManager.refresh();                   //Carregar ChannelManager
         MuteUtil.initialize();                      //Carregar mutes e tempmutes
         try {

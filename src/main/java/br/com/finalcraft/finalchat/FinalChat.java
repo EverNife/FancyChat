@@ -39,7 +39,7 @@ public class FinalChat extends JavaPlugin{
         ConfigManager.initialize(this);
 
         info("&aRegistrando comandos...");
-        CommandRegisterer.registerCommands(this);
+        CommandRegisterer.registerCommands(this, true);
 
         info("&aRegistrando Listeners");
         this.getServer().getPluginManager().registerEvents(fancyChatListener, this);
