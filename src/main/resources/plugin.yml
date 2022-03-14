@@ -10,9 +10,6 @@ commands:
     description: EverNifeFancyChat Tell Command
     usage: /<command>
     aliases: [whispper,t,w,msg,private,r]
-  inchannel:
-    description: EverNifeFancyChat InChannel Command
-    usage: /<command>
   muteall:
     description: EverNifeFancyChat Mute Command
     usage: /<command>
