@@ -1,6 +1,7 @@
 package br.com.finalcraft.finalchat.api;
 
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
+import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import br.com.finalcraft.finalchat.util.ChannelManager;
 import br.com.finalcraft.finalchat.util.MuteUtil;
 import org.bukkit.entity.Player;
@@ -9,14 +10,14 @@ import java.util.Collection;
 
 public class FinalChatApi {
 
-    public static boolean isMainChannel(FancyChannel fancyChannel) {return FancyChannel.GLOBAL_CHANNEL == fancyChannel;}
+    public static boolean isMainChannel(FancyChannel fancyChannel) {return FancyChannelController.GLOBAL_CHANNEL == fancyChannel;}
 
     public static FancyChannel getChannel(String name){
-        return FancyChannel.getFancyChannel(name);
+        return FancyChannelController.getFancyChannel(name);
     }
 
     public static Collection<FancyChannel> getAllChannels(){
-        return FancyChannel.getAllChannels();
+        return FancyChannelController.getAllChannels();
     }
 
     public static FancyChannel getPlayerChannel(Player player){

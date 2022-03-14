@@ -3,6 +3,7 @@ package br.com.finalcraft.finalchat.commands.alias;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.commands.CommandRegisterer;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
+import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import org.bukkit.Bukkit;
 import org.bukkit.command.*;
 import org.bukkit.plugin.SimplePluginManager;
@@ -16,7 +17,7 @@ public class AliaseRegister {
 
     public static void registerChannelAliases(){
 
-        List<FancyChannel> allFancyChannels = new ArrayList<FancyChannel>(FancyChannel.mapOfFancyChannels.values());
+        List<FancyChannel> allFancyChannels = new ArrayList<FancyChannel>(FancyChannelController.mapOfFancyChannels.values());
         List<String> allAliases = new ArrayList<String>();
         allFancyChannels.forEach(fancyChannel -> {
             allAliases.add(fancyChannel.getAlias().toLowerCase());

@@ -4,6 +4,7 @@ package br.com.finalcraft.finalchat.commands;
 import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
+import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import br.com.finalcraft.finalchat.util.ChannelManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -37,7 +38,7 @@ public class CMDInChannel implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        List<FancyChannel> allFancyChannels = new ArrayList<FancyChannel>(FancyChannel.mapOfFancyChannels.values());
+        List<FancyChannel> allFancyChannels = new ArrayList<FancyChannel>(FancyChannelController.mapOfFancyChannels.values());
         List<String> allAliases = new ArrayList<String>();
         allFancyChannels.forEach(fancyChannel -> {
             allAliases.add(fancyChannel.getAlias().toLowerCase());

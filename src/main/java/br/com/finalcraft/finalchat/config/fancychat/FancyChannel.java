@@ -1,19 +1,13 @@
 package br.com.finalcraft.finalchat.config.fancychat;
 
-import br.com.finalcraft.evernifecore.commands.finalcmd.FinalCMDManager;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.config.ConfigManager;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FancyChannel {
-
-    public static FancyChannel GLOBAL_CHANNEL;
-    public static FancyChannel DEFAULT_CHANNEL = null;
-
-    public static String globalChannelName;
-    public static String defaultChannelName;
 
     public String name;
     public String alias;
@@ -24,37 +18,6 @@ public class FancyChannel {
     public List<Player> playersOnThisChannel = new ArrayList<Player>();
 
     public List<FancyTag> tagsFromThisBuilder = new ArrayList<FancyTag>();
-
-    public static Map<String, FancyChannel> mapOfFancyChannels = new HashMap<String, FancyChannel>();
-
-    public static void initialize(){
-
-        for (FancyChannel oldChannel : mapOfFancyChannels.values()) {
-            FinalCMDManager.unregisterCommand(oldChannel.getAlias());
-        }
-
-        mapOfFancyChannels.clear();
-
-        globalChannelName   = ConfigManager.getMainConfig().getString("Settings.globalChannelName");
-        defaultChannelName  = ConfigManager.getMainConfig().getString("Settings.defaultChannelName");
-
-        for (String fancyChannelName : ConfigManager.getMainConfig().getKeys("ChannelFormats")){
-            FancyChannel fancyChannel = new FancyChannel(fancyChannelName);
-            mapOfFancyChannels.put(fancyChannelName,fancyChannel);
-            if (fancyChannelName.equalsIgnoreCase(globalChannelName)){
-                GLOBAL_CHANNEL = fancyChannel;
-            }
-            if (fancyChannelName.equalsIgnoreCase(defaultChannelName)){
-                DEFAULT_CHANNEL = fancyChannel;
-            }
-        }
-
-        if (GLOBAL_CHANNEL == null || DEFAULT_CHANNEL == null){
-            FinalChat.info("[WARNING] Meu consagrado, você setou um canal default/global que não existe!");
-        }
-
-        FinalChat.info("§aFinished Loading " + mapOfFancyChannels.size() + " FancyChannels!");
-    }
 
     public FancyChannel(String name){
         this.name           = name;
@@ -110,16 +73,4 @@ public class FancyChannel {
         return playersOnThisChannel;
     }
 
-    public static Collection<FancyChannel> getAllChannels(){
-        return mapOfFancyChannels.values();
-    }
-
-    public static FancyChannel getFancyChannel(String name){
-        for (FancyChannel fancyChannel : getAllChannels()){
-            if (fancyChannel.getName().equalsIgnoreCase(name)){
-                return fancyChannel;
-            }
-        }
-        return null;
-    }
 }

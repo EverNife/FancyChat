@@ -1,6 +1,7 @@
 package br.com.finalcraft.finalchat.util;
 
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
+import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class ChannelManager {
     public static void refresh(){
         playerLockFancyChannelMap.clear();
         for (Player player : Bukkit.getOnlinePlayers()){
-            for (FancyChannel fancyChannel : FancyChannel.getAllChannels()){
+            for (FancyChannel fancyChannel : FancyChannelController.getAllChannels()){
                 if (PermUtil.hasChannelPermission(player,fancyChannel)){
                     fancyChannel.addMember(player);
                 }
@@ -40,17 +41,17 @@ public class ChannelManager {
     }
 
     public static void playerJoined(Player player){
-        for (FancyChannel fancyChannel : FancyChannel.getAllChannels()){
+        for (FancyChannel fancyChannel : FancyChannelController.getAllChannels()){
             if (PermUtil.hasChannelPermission(player,fancyChannel)){
                 fancyChannel.addMember(player);
             }
         }
-        FancyChannel playerLockedChannel = playerLockFancyChannelMap.getOrDefault(player,FancyChannel.GLOBAL_CHANNEL);
+        FancyChannel playerLockedChannel = playerLockFancyChannelMap.getOrDefault(player, FancyChannelController.GLOBAL_CHANNEL);
         playerLockFancyChannelMap.put(player,playerLockedChannel);
     }
 
     public static void playerLeaved(Player player){
-        for (FancyChannel fancyChannel : FancyChannel.getAllChannels()){
+        for (FancyChannel fancyChannel : FancyChannelController.getAllChannels()){
             fancyChannel.removeMember(player);
         }
     }
@@ -61,6 +62,6 @@ public class ChannelManager {
 
     public static FancyChannel getPlayerLockChannel(Player player){
         FancyChannel fancyChannel = playerLockFancyChannelMap.get(player);
-        return fancyChannel != null ? fancyChannel : FancyChannel.DEFAULT_CHANNEL;
+        return fancyChannel != null ? fancyChannel : FancyChannelController.DEFAULT_CHANNEL;
     }
 }

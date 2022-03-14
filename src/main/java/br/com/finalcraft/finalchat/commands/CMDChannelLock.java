@@ -3,6 +3,7 @@ package br.com.finalcraft.finalchat.commands;
 
 import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
+import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import br.com.finalcraft.finalchat.util.ChannelManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,7 +32,7 @@ public class CMDChannelLock implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        List<FancyChannel> allFancyChannels = new ArrayList<FancyChannel>(FancyChannel.mapOfFancyChannels.values());
+        List<FancyChannel> allFancyChannels = new ArrayList<FancyChannel>(FancyChannelController.mapOfFancyChannels.values());
 
         List<String> allNames = new ArrayList<String>();
         List<String> allAliases = new ArrayList<String>();
