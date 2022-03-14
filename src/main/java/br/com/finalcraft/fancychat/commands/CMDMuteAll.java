@@ -2,7 +2,7 @@ package br.com.finalcraft.fancychat.commands;
 
 
 import br.com.finalcraft.evernifecore.argumento.MultiArgumentos;
-import br.com.finalcraft.fancychat.FCBukkitUtil;
+import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.util.MuteUtil;
 import org.bukkit.command.Command;

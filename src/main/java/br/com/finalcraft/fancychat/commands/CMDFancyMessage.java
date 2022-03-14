@@ -2,7 +2,7 @@ package br.com.finalcraft.fancychat.commands;
 
 
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
-import br.com.finalcraft.fancychat.FCBukkitUtil;
+import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

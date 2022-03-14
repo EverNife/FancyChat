@@ -1,7 +1,7 @@
 package br.com.finalcraft.fancychat.util.messages;
 
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
-import br.com.finalcraft.fancychat.FCBukkitUtil;
+import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.fancychat.FancyChat;
 import br.com.finalcraft.fancychat.PermissionNodes;
 import br.com.finalcraft.fancychat.api.FancyChatSendChannelMessageEvent;
