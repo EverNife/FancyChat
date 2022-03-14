@@ -14,7 +14,7 @@ public class CommandRegisterer {
         pluginInstance.getCommand("channellock").setExecutor(new CMDChannelLock());
         pluginInstance.getCommand("muteall").setExecutor(new CMDMuteAll());
         FinalCMDManager.registerCommand(pluginInstance, CMDBroadcast.class);
-        pluginInstance.getCommand("fancymessage").setExecutor(new CMDFancyMessage());
+        FinalCMDManager.registerCommand(pluginInstance, CMDFancyMessage.class);
     }
 
 }

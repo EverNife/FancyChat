@@ -14,10 +14,6 @@ commands:
     description: EverNifeFancyChat Tell Command
     usage: /<command>
     aliases: [whispper,t,w,msg,private,r]
-  fancymessage:
-    description: EverNifeFancyChat Tell Command
-    usage: /<command>
-    aliases: [fmessage,fmsg,umsg,pbroadcast]
   channellock:
     description: EverNifeFancyChat ChanellLock Command
     usage: /<command>
