@@ -6,10 +6,6 @@ depend: [ EverNifeCore ]
 softdepend: [ PlaceholderAPI, Factions, Essentials ]
 
 commands:
-  chat:
-    description: EverNifeFancyChat Main Command
-    usage: /<command>
-    aliases: [fancychat,fchat]
   tell:
     description: EverNifeFancyChat Tell Command
     usage: /<command>
