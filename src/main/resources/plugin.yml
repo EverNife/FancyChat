@@ -1,7 +1,7 @@
-name: FancyChat
-version: 1.0.6
+name: FinalChat
+version: 1.0.7
 author: EverNife
-main: br.com.finalcraft.fancychat.FancyChat
+main: br.com.finalcraft.finalchat.FinalChat
 depend: [ EverNifeCore ]
 softdepend: [ PlaceholderAPI, Factions, Essentials ]
 
