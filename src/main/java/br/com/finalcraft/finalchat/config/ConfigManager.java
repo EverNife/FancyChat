@@ -1,7 +1,6 @@
 package br.com.finalcraft.finalchat.config;
 
 import br.com.finalcraft.evernifecore.config.Config;
-import br.com.finalcraft.finalchat.commands.alias.AliaseRegister;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import br.com.finalcraft.finalchat.config.fancychat.FancyTag;
 import br.com.finalcraft.finalchat.config.fancychat.TellTag;
@@ -49,7 +48,6 @@ public class ConfigManager {
         }catch (Exception e){
             e.printStackTrace();
         }
-        AliaseRegister.registerChannelAliases();    //Registrar os atalhos para os canais, /g /l etc
     }
 
     private static final int CURRENT_VERSION = 3;
