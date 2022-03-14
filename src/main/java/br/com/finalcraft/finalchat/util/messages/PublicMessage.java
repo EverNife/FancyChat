@@ -76,7 +76,7 @@ public class PublicMessage {
         new BukkitRunnable(){
             @Override
             public void run() {
-                if (channel.distance <= -1){
+                if (channel.getDistance() <= -1){
                     for (Player onlinePlayerToSendMessage : channel.getPlayersOnThisChannel()) {
                         if (!IgnoreUtil.isIgnoring(onlinePlayerToSendMessage, player)){
 

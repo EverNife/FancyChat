@@ -60,10 +60,10 @@ public class IgnoreUtil {
     }
 
     public static boolean hasChannelPermission(Player player, FancyChannel fancyChannel){
-        if (fancyChannel.permission.isEmpty()){
+        if (fancyChannel.getPermission().isEmpty()){
             return true;
         }
-        return player.hasPermission(fancyChannel.permission);
+        return player.hasPermission(fancyChannel.getPermission());
     }
 
     public static boolean ignorePlayer(String playerName, String otherPlayerName){

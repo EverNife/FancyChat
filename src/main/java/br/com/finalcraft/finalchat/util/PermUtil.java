@@ -6,10 +6,10 @@ import org.bukkit.entity.Player;
 public class PermUtil {
 
     public static boolean hasChannelPermission(Player player, FancyChannel fancyChannel){
-        if (fancyChannel.permission.isEmpty()){
+        if (fancyChannel.getPermission().isEmpty()){
             return true;
         }
-        return player.hasPermission(fancyChannel.permission);
+        return player.hasPermission(fancyChannel.getPermission());
     }
 
 }
