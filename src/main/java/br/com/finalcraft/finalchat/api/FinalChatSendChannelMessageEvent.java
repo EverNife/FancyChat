@@ -6,7 +6,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class FancyChatSendChannelMessageEvent extends Event implements Cancellable {
+public class FinalChatSendChannelMessageEvent extends Event implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
 	private boolean cancelled;
@@ -15,7 +15,7 @@ public class FancyChatSendChannelMessageEvent extends Event implements Cancellab
 	private FancyChannel channel;
 	private boolean cancelChat = true;
 	
-	public FancyChatSendChannelMessageEvent(CommandSender sender, FancyChannel channel, String msg){
+	public FinalChatSendChannelMessageEvent(CommandSender sender, FancyChannel channel, String msg){
 		this.sender = sender;
 		this.msg = msg;
 		this.channel = channel;

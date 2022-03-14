@@ -3,7 +3,7 @@ package br.com.finalcraft.finalchat.config.lang;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FancyChatLang {
+public class FinalChatLang {
 
     public static Map<String,String> mapOfLocale = new HashMap<String, String>();
 

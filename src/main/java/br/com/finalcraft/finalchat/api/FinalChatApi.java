@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Collection;
 
-public class FancyChatApi {
+public class FinalChatApi {
 
     public static boolean isMainChannel(FancyChannel fancyChannel) {return FancyChannel.GLOBAL_CHANNEL == fancyChannel;}
 

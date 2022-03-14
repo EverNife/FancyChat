@@ -2,7 +2,7 @@ package br.com.finalcraft.finalchat.util.messages;
 
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.finalchat.config.fancychat.TellTag;
-import br.com.finalcraft.finalchat.config.lang.FancyChatLang;
+import br.com.finalcraft.finalchat.config.lang.FinalChatLang;
 import br.com.finalcraft.finalchat.util.FancyTextUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,7 +18,7 @@ public class PrivateMessage {
                 || (receiver instanceof Player && (!((Player)receiver).isOnline()
                 || (sender instanceof Player && !((Player)sender).canSee((Player)receiver))))
         ){
-            sender.sendMessage(FancyChatLang.getLang("listener.invalidplayer"));
+            sender.sendMessage(FinalChatLang.getLang("listener.invalidplayer"));
             return;
         }
         synchronized (tellHistory){

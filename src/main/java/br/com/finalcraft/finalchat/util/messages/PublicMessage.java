@@ -4,7 +4,7 @@ import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.PermissionNodes;
-import br.com.finalcraft.finalchat.api.FancyChatSendChannelMessageEvent;
+import br.com.finalcraft.finalchat.api.FinalChatSendChannelMessageEvent;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.config.fancychat.FancyTag;
 import br.com.finalcraft.finalchat.placeholders.PlaceHolderIntegration;
@@ -30,7 +30,7 @@ public class PublicMessage {
             return;
         }
 
-        FancyChatSendChannelMessageEvent sendMessageEvent = new FancyChatSendChannelMessageEvent(player, channel, msg);
+        FinalChatSendChannelMessageEvent sendMessageEvent = new FinalChatSendChannelMessageEvent(player, channel, msg);
         Bukkit.getServer().getPluginManager().callEvent(sendMessageEvent);
         if (sendMessageEvent.isCancelled()){
             return;
