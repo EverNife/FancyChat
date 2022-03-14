@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 public class CMDBroadcast {
 
     @FinalCMD(
-            aliases = {"fcbroadcast","broadcast"},
+            aliases = {"fbroadcast","broadcast"},
             usage = "<msg>",
             permission = PermissionNodes.COMMAND_BROADCAST
     )
