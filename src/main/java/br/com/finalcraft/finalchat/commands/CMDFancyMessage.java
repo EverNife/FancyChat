@@ -16,9 +16,11 @@ public class CMDFancyMessage {
             aliases = {"fancymessage","fmessage","fmsg","umsg","pbroadcast"},
             permission = PermissionNodes.COMMAND_FANCYMESSAGE
     )
-    public void fancyMessage(CommandSender sender, MultiArgumentos argumentos, @Arg(name = "<Player>") Player target, @Arg(name = "<msg>") String message) {
+    public void fancyMessage(MultiArgumentos argumentos, @Arg(name = "<Player>") Player target, @Arg(name = "<msg>") String message) {
+        message = argumentos.joinStringArgs(1);
+
         FancyText.of(
-                ChatColor.translateAlternateColorCodes('&',argumentos.joinStringArgs(1))
+                ChatColor.translateAlternateColorCodes('&',message)
         ).send(target);
     }
 }
