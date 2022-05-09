@@ -1,89 +1,60 @@
 package br.com.finalcraft.finalchat.commands;
 
 
+import br.com.finalcraft.evernifecore.argumento.MultiArgumentos;
+import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.Arg;
+import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
+import br.com.finalcraft.evernifecore.util.FCMessageUtil;
 import br.com.finalcraft.finalchat.util.MuteUtil;
 import br.com.finalcraft.finalchat.util.messages.PrivateMessage;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class CMDTell implements CommandExecutor {
+public class CMDTell {
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        tell(label,sender,args);
-        return true;
+    @FinalCMD(
+            aliases = {"ftell","tell","whispper","t","w","msg","private"}
+    )
+    public void tell(Player player, MultiArgumentos argumentos, @Arg(name = "<Player>") Player target, @Arg(name = "<msg>") String message){
+
+        if (MuteUtil.isMuted(player)){
+            player.sendMessage("§cVocê está mutado!");
+            player.sendMessage(MuteUtil.getMuteMessage(player));
+            return;
+        }
+
+        message = argumentos.joinStringArgs(1);
+
+        PrivateMessage.sendTell(player, target, message);
     }
 
-    // -----------------------------------------------------------------------------------------------------------------------------//
-    // Command Tell
-    // -----------------------------------------------------------------------------------------------------------------------------//
-    public boolean tell(String label, CommandSender sender, String[] args){
+    @FinalCMD(
+            aliases = {"reply","responder","r"}
+    )
+    public void reply(Player player, MultiArgumentos argumentos, @Arg(name = "<msg>") String message){
 
-        if (MuteUtil.isMuted(sender)){
-            sender.sendMessage("§cVocê está mutado!");
-            sender.sendMessage(MuteUtil.getMuteMessage(sender));
-            return true;
+        if (MuteUtil.isMuted(player)){
+            player.sendMessage("§cVocê está mutado!");
+            player.sendMessage(MuteUtil.getMuteMessage(player));
+            return;
         }
 
-        if (args.length == 0){
-            sender.sendMessage("§6§l ▶ §e/" + label + " <Player> <msg>");
-            return true;
+        String targetName = PrivateMessage.getLastTarget(player.getName());
+
+        if (targetName == null){
+            player.sendMessage("§6§l ▶ §cVocê não recebeu nenhuma mensagem privada recentemente...");
+            return;
         }
 
-        Player target = null;
-        boolean firstArgWasAPerson = false;
-        boolean firstArgCanBePerson = true;
-        switch (label){
-            case "r":
-                firstArgCanBePerson = false;
-                break;
-        }
-
-        if (args.length >= 1){
-            Player possibleTarget = null;
-            if (firstArgCanBePerson){
-                possibleTarget = Bukkit.getPlayer(args[0]);
-            }
-            if (possibleTarget != null){
-                target = possibleTarget;
-                firstArgWasAPerson = true;
-            }else {
-                String targetName = PrivateMessage.getLastTarget(sender.getName());
-                if (targetName != null){
-                    target = Bukkit.getPlayer(targetName);
-                }
-            }
-        }
+        final Player target = targetName != null ? Bukkit.getPlayer(targetName) : null;
 
         if (target == null || !target.isOnline()){
-            sender.sendMessage("§6§l ▶ §cJogador " + args[0] + " não encontrado!");
-            return true;
+            FCMessageUtil.playerNotOnline(player, targetName);
+            return;
         }
 
-        StringBuilder msgBuilder = new StringBuilder();
-        if (!firstArgWasAPerson){
-            msgBuilder.append(args[0] + " ");
-        }
-        int lastChar = args.length - 1;
-        for (int i = 1; i < args.length; i++){
-            if (i == lastChar){
-                msgBuilder.append(args[i]);
-            }else {
-                msgBuilder.append(args[i] + " ");
-            }
-        }
+        message = argumentos.joinStringArgs(0);
 
-        String theMsg = msgBuilder.toString();
-
-        if (theMsg.isEmpty()){
-            sender.sendMessage("§6§l ▶ §e/" + label + " " + target.getName() + " <msg>");
-            return true;
-        }
-
-        PrivateMessage.sendTell((Player)sender,target,theMsg);
-        return true;
+        PrivateMessage.sendTell(player, target, message);
     }
 }

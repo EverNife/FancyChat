@@ -7,7 +7,6 @@ import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.finalchat.PermissionNodes;
 import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class CMDFancyMessage {

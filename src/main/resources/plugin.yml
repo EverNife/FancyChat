@@ -4,12 +4,3 @@ author: EverNife
 main: br.com.finalcraft.finalchat.FinalChat
 depend: [ EverNifeCore ]
 softdepend: [ PlaceholderAPI, Factions, Essentials ]
-
-commands:
-  tell:
-    description: EverNifeFancyChat Tell Command
-    usage: /<command>
-    aliases: [whispper,t,w,msg,private,r]
-  muteall:
-    description: EverNifeFancyChat Mute Command
-    usage: /<command>

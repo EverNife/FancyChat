@@ -1,5 +1,6 @@
 package br.com.finalcraft.finalchat.util.messages;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyFormatter;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.finalchat.config.fancychat.TellTag;
 import br.com.finalcraft.finalchat.config.lang.FinalChatLang;
@@ -7,44 +8,52 @@ import br.com.finalcraft.finalchat.util.FancyTextUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PrivateMessage {
 
     public static Map<String,String> tellHistory = new HashMap<String, String>();
 
-    public static void sendTell(Player sender, Player receiver, String msg){
-        if (receiver == null
-                || (receiver instanceof Player && (!((Player)receiver).isOnline()
-                || (sender instanceof Player && !((Player)sender).canSee((Player)receiver))))
+    public static void sendTell(Player sender, Player target, String msg){
+        if (target == null
+                || !target.isOnline()
+                || !sender.canSee(target)
         ){
             sender.sendMessage(FinalChatLang.getLang("listener.invalidplayer"));
             return;
         }
+
         synchronized (tellHistory){
-            tellHistory.put(sender.getName(), receiver.getName());
-            tellHistory.put(receiver.getName(), sender.getName());
+            tellHistory.put(sender.getName(), target.getName());
+            tellHistory.put(target.getName(), sender.getName());
         }
 
-        FancyText fancyTextSender   = FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextSender(), sender);
-        FancyText fancyTextReceiver = FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextReceiver(), sender);
+        //Append message prefix
+        FancyFormatter textToSender = FancyFormatter.of().append(FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextSender(), sender));
+        FancyFormatter textToTarget = FancyFormatter.of().append(FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextSender(), sender));
 
-        fancyTextSender.setText(fancyTextSender.getText().replace("{sender}",sender.getName()).replace("{receiver}",receiver.getName()));
-        fancyTextReceiver.setText(fancyTextReceiver.getText().replace("{sender}",sender.getName()).replace("{receiver}",receiver.getName()));
+        //Replace static variables
+        textToSender.replace("{sender}",sender.getName()).replace("{receiver}",target.getName());
+        textToTarget.replace("{sender}",sender.getName()).replace("{receiver}",target.getName());
 
+        //Apply to the final message color
         if (sender.hasPermission("fancychat.color")){
             msg = ChatColor.translateAlternateColorCodes('&', msg);
         }
 
-        FancyText fancyTextMessage = new FancyText(msg);
+        //Append message body
+        FancyText messageBody = new FancyText(msg);
+        textToSender.append(messageBody);
+        textToTarget.append(messageBody);
 
-        List<FancyText> senderFancyText = new ArrayList(Arrays.asList(fancyTextSender,fancyTextMessage));
+        //Send the message
+        textToSender.send(sender);
+        textToTarget.send(target);
 
-        FancyText.sendTo(sender, senderFancyText);
-        FancyText.sendTo(receiver,Arrays.asList(fancyTextReceiver,fancyTextMessage));
-
-
-        SpyMessage.spyOnThis(senderFancyText,new ArrayList(Arrays.asList(sender,receiver)));
+        //Spy on it
+        SpyMessage.spyOnThis(textToTarget.getFancyTextList(), Arrays.asList(sender,target));
     }
 
 

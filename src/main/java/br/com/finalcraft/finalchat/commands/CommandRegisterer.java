@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CommandRegisterer {
 
-    private static final List<String> registeredCommands = new ArrayList<>();
+    private static final List<String> registeredAliases = new ArrayList<>();
 
     public static void registerCommands(JavaPlugin pluginInstance, boolean firstLoad) {
 
@@ -21,21 +21,21 @@ public class CommandRegisterer {
             ArgParserManager.addGlobalParser(FancyChannel.class, ArgParserFancyChannel.class);
 
             //Add Commands
-
-            FinalCMDManager.registerCommand(pluginInstance,CoreCommand.class);
-            pluginInstance.getCommand("tell").setExecutor(new CMDTell());
+            FinalCMDManager.registerCommand(pluginInstance, CoreCommand.class);
+            FinalCMDManager.registerCommand(pluginInstance, CMDTell.class);
             FinalCMDManager.registerCommand(pluginInstance, CMDChannelLock.class);
-            pluginInstance.getCommand("muteall").setExecutor(new CMDMuteAll());
+            FinalCMDManager.registerCommand(pluginInstance, CMDMuteAll.class);
             FinalCMDManager.registerCommand(pluginInstance, CMDBroadcast.class);
             FinalCMDManager.registerCommand(pluginInstance, CMDFancyMessage.class);
         }
 
-        for (String registeredCommand : registeredCommands) {
+        for (String registeredCommand : registeredAliases) {
             FinalCMDManager.unregisterCommand(registeredCommand, pluginInstance);
         }
+        registeredAliases.clear();
 
         for (FancyChannel fancyChannel : FancyChannelController.getAllChannels()) {
-            registeredCommands.add(fancyChannel.getName()); //Add for removal in case os reload
+            registeredAliases.add(fancyChannel.getName()); //Add for removal in case of reload
             FinalCMDManager.registerCommand(pluginInstance, new CMDInChannel(fancyChannel));
         }
     }

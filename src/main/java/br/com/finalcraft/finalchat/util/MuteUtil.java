@@ -87,8 +87,8 @@ public class MuteUtil {
 
     public MuteUtil(String playerName) {
         this.playerName = playerName;
-        this.start  = ConfigManager.getDataStore().getLong("MuteTime." + this.playerName + ".start",-1);
-        this.time   = ConfigManager.getDataStore().getLong("MuteTime." + this.playerName + ".time",0);
+        this.start  = ConfigManager.getDataStore().getLong("MuteTime." + this.playerName + ".start",-1L);
+        this.time   = ConfigManager.getDataStore().getLong("MuteTime." + this.playerName + ".time",0L);
     }
 
     public MuteUtil(String playerName, long start, long time) {

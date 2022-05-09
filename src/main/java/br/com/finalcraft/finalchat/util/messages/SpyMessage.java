@@ -35,9 +35,9 @@ public class SpyMessage {
 
         HashSet<UUID> allPlayerWhoHeardUUIDs = new HashSet();
 
-        StringBuilder allPlayerWhoHeardString = new StringBuilder();
+        StringBuilder allPlayerWhoHeardString = new StringBuilder("§7§o The Eye is Watching Us");
         for (Player player : allPlayerWhoHeard){
-            allPlayerWhoHeardString.append("\n  - " + player.getName());
+            allPlayerWhoHeardString.append("\n§7  - §a" + player.getName());
             allPlayerWhoHeardUUIDs.add(player.getUniqueId());
         }
 
