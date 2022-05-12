@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @FinalCMD(
-        aliases = {"fancychat","fchat", "chat"},
+        aliases = {"fancychat","fchat", "chat", "finalchat"},
         helpHeader = "§6(  §a§lFancyChat§e  §6)§m"
 )
 public class CoreCommand {
