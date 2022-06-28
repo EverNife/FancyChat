@@ -30,13 +30,18 @@ public class ArgParserFancyChannel extends ArgParser<FancyChannel> {
     @Override
     public FancyChannel parserArgument(@NotNull CommandSender sender, @NotNull Argumento argumento) throws ArgParseException {
 
-        for (FancyChannel fancyChannel : FancyChannelController.getAllChannels()) {
-            if (argumento.equalsIgnoreCase(fancyChannel.getName(), fancyChannel.getAlias())){
-                return fancyChannel;
-            }
+        FancyChannel theChannel = FancyChannelController.getAllChannels().stream()
+                .filter(fancyChannel -> argumento.equalsIgnoreCase(fancyChannel.getAlias(), fancyChannel.getName()))
+                .filter(fancyChannel -> fancyChannel.getPermission().isEmpty() || sender.hasPermission(fancyChannel.getPermission()))
+                .findFirst()
+                .orElse(null);
+
+        if (theChannel == null && this.argInfo.isRequired()){
+            sender.sendMessage("§cCanal [" + argumento + "] não encontrado.");
+            throw new ArgParseException();
         }
 
-        return null;
+        return theChannel;
     }
 
     @Override
