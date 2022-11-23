@@ -23,9 +23,9 @@ public class ArgParserFancyChannel extends ArgParser<FancyChannel> {
         super(argInfo);
     }
 
-    @FCLocale(lang = LocaleType.PT_BR, text = "§4§l ▶ §cMinichest não encontrada! Use §e/%label% list")
-    @FCLocale(lang = LocaleType.EN_US, text = "§4§l ▶ §cMinichest not found! Use §e/%label% list")
-    private static LocaleMessage MINICHEST_NOT_FOUND;
+    @FCLocale(lang = LocaleType.PT_BR, text = "§4§l ▶ §cCanal §e%channel%§c não encontrado!")
+    @FCLocale(lang = LocaleType.EN_US, text = "§4§l ▶ §cChannel §e%channel%§c not found!")
+    private static LocaleMessage CHANNEL_NOT_FOUND;
 
     @Override
     public FancyChannel parserArgument(@NotNull CommandSender sender, @NotNull Argumento argumento) throws ArgParseException {
@@ -37,7 +37,9 @@ public class ArgParserFancyChannel extends ArgParser<FancyChannel> {
                 .orElse(null);
 
         if (theChannel == null && this.argInfo.isRequired()){
-            sender.sendMessage("§cCanal [" + argumento + "] não encontrado.");
+            CHANNEL_NOT_FOUND
+                    .addPlaceholder("%channel%", argumento)
+                    .send(sender);
             throw new ArgParseException();
         }
 
@@ -50,7 +52,7 @@ public class ArgParserFancyChannel extends ArgParser<FancyChannel> {
         List<String> matched = new ArrayList<>();
 
         for (FancyChannel fancyChannel : FancyChannelController.getAllChannels()) {
-            if ( (fancyChannel.getPermission().isEmpty() || context.getPlayer().hasPermission(fancyChannel.getPermission()))
+            if ( (fancyChannel.getPermission().isEmpty() || context.getSender().hasPermission(fancyChannel.getPermission()))
                     && StringUtil.startsWithIgnoreCase(fancyChannel.getName(), context.getLastWord())){
                 matched.add(fancyChannel.getName());
             }

@@ -2,12 +2,12 @@ package br.com.finalcraft.finalchat;
 
 public class PermissionNodes {
 
-    public static final String COMMAND_RELOAD           = "fancychat.command.reload";
-    public static final String COMMAND_MUTE             = "fancychat.command.mute";
-    public static final String COMMAND_BROADCAST        = "fancychat.command.broadcast";
-    public static final String COMMAND_FANCYMESSAGE     = "fancychat.command.fancymessage";
-    public static final String COMMAND_SPY              = "fancychat.command.spy";
-    public static final String CHAT_COLOR               = "fancychat.chat.color";
-    public static final String MUTE_BYPASS              = "fancychat.chat.mute.bypass";
+    public static final String COMMAND_RELOAD           = "finalchat.command.reload";
+    public static final String COMMAND_MUTE_ALL         = "finalchat.command.muteall";
+    public static final String COMMAND_BROADCAST        = "finalchat.command.broadcast";
+    public static final String COMMAND_FANCYMESSAGE     = "finalchat.command.fancymessage";
+    public static final String COMMAND_SPY              = "finalchat.command.spy";
+    public static final String CHAT_COLOR               = "finalchat.chat.color";
+    public static final String MUTE_BYPASS              = "finalchat.chat.mute.bypass";
 
 }

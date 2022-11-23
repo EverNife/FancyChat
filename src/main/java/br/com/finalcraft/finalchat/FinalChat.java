@@ -1,5 +1,6 @@
 package br.com.finalcraft.finalchat;
 
+import br.com.finalcraft.evernifecore.ecplugin.annotations.ECPlugin;
 import br.com.finalcraft.evernifecore.version.MCVersion;
 import br.com.finalcraft.finalchat.commands.CommandRegisterer;
 import br.com.finalcraft.finalchat.config.ConfigManager;
@@ -13,6 +14,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+@ECPlugin
 public class FinalChat extends JavaPlugin{
 
     public static FinalChat instance;
@@ -21,7 +23,7 @@ public class FinalChat extends JavaPlugin{
         instance.getLogger().info("[Info] " + msg.replace("&","§"));
     }
     public static void chatLog(String msg){
-        instance.getLogger().info("[ChatLog] " + (MCVersion.isLegacy() ? ChatColor.stripColor(msg) : msg));
+        instance.getLogger().info("[ChatLog] " + (MCVersion.isBellow1_7_10() ? ChatColor.stripColor(msg) : msg));
     }
     public static void debug(String msg){
         instance.getLogger().info("[Debug] " + msg.replace("&","§"));
@@ -66,6 +68,12 @@ public class FinalChat extends JavaPlugin{
     @Override
     public void onDisable() {
         HandlerList.unregisterAll(fancyChatListener);
+    }
+
+    @ECPlugin.Reload
+    public void onReload() {
+        ConfigManager.initialize(FinalChat.instance);
+        CommandRegisterer.registerCommands(FinalChat.instance, false);
     }
 
 

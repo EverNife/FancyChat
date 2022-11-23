@@ -1,22 +1,22 @@
 package br.com.finalcraft.finalchat.config.fancychat;
 
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
+import br.com.finalcraft.evernifecore.util.FCColorUtil;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.config.ConfigManager;
-import org.bukkit.ChatColor;
 
 public class TellTag {
 
     public static TellTag TELL_TAG;
 
-    public String name;
-    public String sender_format;
-    public String receiver_format;
-    public String hover_message;
-    public String suggest_command;
+    private final String name;
+    private String sender_format;
+    private String receiver_format;
+    private String hover_message;
+    private String suggest_command;
 
-    FancyText fancyTextSender;
-    FancyText fancyTextReceiver;
+    private final FancyText fancyTextSender;
+    private final FancyText fancyTextReceiver;
 
     public static void initialize(){
         TELL_TAG = new TellTag();
@@ -39,9 +39,9 @@ public class TellTag {
             this.hover_message = hoverBuilder.substring(0,hoverBuilder.length() - 1);
         }
 
-        this.sender_format           = ChatColor.translateAlternateColorCodes('&',this.sender_format);
-        this.receiver_format         = ChatColor.translateAlternateColorCodes('&',this.receiver_format);
-        this.hover_message           = ChatColor.translateAlternateColorCodes('&',this.hover_message);
+        this.sender_format           = FCColorUtil.colorfy(this.sender_format);
+        this.receiver_format         = FCColorUtil.colorfy(this.receiver_format);
+        this.hover_message           = FCColorUtil.colorfy(this.hover_message);
         suggest_command = (!suggest_command.startsWith("/") ? "/" + suggest_command : suggest_command);
 
         fancyTextSender = new FancyText(sender_format);

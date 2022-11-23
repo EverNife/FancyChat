@@ -5,8 +5,8 @@ import br.com.finalcraft.evernifecore.argumento.MultiArgumentos;
 import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.Arg;
 import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
+import br.com.finalcraft.evernifecore.util.FCColorUtil;
 import br.com.finalcraft.finalchat.PermissionNodes;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class CMDFancyMessage {
@@ -19,7 +19,7 @@ public class CMDFancyMessage {
         message = argumentos.joinStringArgs(1);
 
         FancyText.of(
-                ChatColor.translateAlternateColorCodes('&',message)
+                FCColorUtil.colorfy(message)
         ).send(target);
     }
 }

@@ -1,12 +1,15 @@
 package br.com.finalcraft.finalchat.util.messages;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyFormatter;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
+import br.com.finalcraft.evernifecore.util.FCColorUtil;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.PermissionNodes;
 import br.com.finalcraft.finalchat.api.FinalChatSendChannelMessageEvent;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.config.fancychat.FancyTag;
+import br.com.finalcraft.finalchat.messages.FChatMessages;
 import br.com.finalcraft.finalchat.placeholders.PlaceHolderIntegration;
 import br.com.finalcraft.finalchat.util.FancyTextUtil;
 import br.com.finalcraft.finalchat.util.IgnoreUtil;
@@ -15,7 +18,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +27,14 @@ public class PublicMessage {
     public static void sendPublicMessage(Player player, FancyChannel channel, String msg){
 
         if (MuteUtil.isMuted(player)){
-            player.sendMessage("§6§l ▶ Você está mutado!");
-            player.sendMessage(MuteUtil.getMuteMessage(player));
+            FChatMessages.YOU_ARE_MUTED
+                    .addPlaceholder("%reason%", MuteUtil.getMuteMessage(player))
+                    .send(player);
             return;
+        }
+
+        if (player.hasPermission(PermissionNodes.CHAT_COLOR)){
+            msg = FCColorUtil.colorfy(msg);
         }
 
         FinalChatSendChannelMessageEvent sendMessageEvent = new FinalChatSendChannelMessageEvent(player, channel, msg);
@@ -36,9 +43,7 @@ public class PublicMessage {
             return;
         }
 
-        if (player.hasPermission(PermissionNodes.CHAT_COLOR)){
-            msg = ChatColor.translateAlternateColorCodes('&', msg);
-        }
+        msg = sendMessageEvent.getMessage();
 
         int idOfMSGText = 0;
         int contador = 0;
@@ -71,46 +76,39 @@ public class PublicMessage {
 
         final int finalIdOfMSGText = idOfMSGText;
 
+        if (channel.getDistance() <= -1){
+            for (Player onlinePlayerToSendMessage : channel.getPlayersOnThisChannel()) {
+                if (!IgnoreUtil.isIgnoring(onlinePlayerToSendMessage, player)){
 
-        //Better do the rest sync, read        http://bit.ly/1oSiM6C
-        new BukkitRunnable(){
-            @Override
-            public void run() {
-                if (channel.getDistance() <= -1){
-                    for (Player onlinePlayerToSendMessage : channel.getPlayersOnThisChannel()) {
-                        if (!IgnoreUtil.isIgnoring(onlinePlayerToSendMessage, player)){
+                    //Entregando mensagem ao jogador!
+                    doTheDeploy(textChatList,player,onlinePlayerToSendMessage,finalIdOfMSGText);
 
-                            //Entregando mensagem ao jogador!
-                            doTheDeploy(textChatList,player,onlinePlayerToSendMessage,finalIdOfMSGText);
+                }
+            }
+        }else {
+            List<Player> playerWhoHeardThis = new ArrayList<Player>();
 
-                        }
-                    }
-                }else {
-                    List<Player> playerThatHeardedThis = new ArrayList<Player>();
+            for (Player onlinePlayerToSendMessage : channel.getPlayersOnThisChannel()) {
+                if (calcDistance(player,onlinePlayerToSendMessage) <=  channel.getDistance()){
+                    if (!IgnoreUtil.isIgnoring(onlinePlayerToSendMessage, player)){
+                        playerWhoHeardThis.add(onlinePlayerToSendMessage);
 
-                    for (Player onlinePlayerToSendMessage : channel.getPlayersOnThisChannel()) {
-                        if (calcDistance(player,onlinePlayerToSendMessage) <=  channel.getDistance()){
-                            playerThatHeardedThis.add(onlinePlayerToSendMessage);
-                            if (!IgnoreUtil.isIgnoring(onlinePlayerToSendMessage, player)){
-
-                                //Entregando mensage ao jogador!
-                                doTheDeploy(textChatList,player,onlinePlayerToSendMessage,finalIdOfMSGText);
-
-                            }
-                        }
-                    }
-
-                    if (playerThatHeardedThis.size() <= 1 && channel.getDistance() > -1){
-                        player.sendMessage("§6§l ▶ §cNão tem ninguem perto de você para receber essa mensagem...");
-                    }
-
-                    if (channel.getDistance() > -1){
-                        SpyMessage.spyOnThis(textChatList, playerThatHeardedThis);
+                        //Entregando mensage ao jogador!
+                        doTheDeploy(textChatList,player,onlinePlayerToSendMessage,finalIdOfMSGText);
                     }
                 }
-                FinalChat.chatLog(FancyTextUtil.textOnly(textChatList));
             }
-        }.runTask(FinalChat.instance);
+
+            if (playerWhoHeardThis.size() <= 1 && channel.getDistance() > -1){
+                player.sendMessage("§6§l ▶ §cNão tem ninguém perto de você para receber essa mensagem...");
+            }
+
+            if (channel.getDistance() > -1){
+                SpyMessage.spyOnThis(textChatList, playerWhoHeardThis);
+            }
+        }
+
+        FinalChat.chatLog(FancyTextUtil.textOnly(textChatList));
     }
 
     public static void doTheDeploy(final List<FancyText> textChatList, Player player, Player onlinePlayerToSendMessage, int finalIdOfMSGText){
@@ -118,29 +116,29 @@ public class PublicMessage {
 
         String[] array = fancyTextContainingMessage.getText().split("(?i)" + onlinePlayerToSendMessage.getName()); // splits case insensitive
         if (array.length > 1){
-            List<FancyText> textToSend = new ArrayList<FancyText>();
-            textToSend.addAll(textChatList.subList(0,finalIdOfMSGText));
+            FancyFormatter fancyFormatter = new FancyFormatter();
+            fancyFormatter.append(textChatList.subList(0,finalIdOfMSGText).toArray(new FancyText[0]));
 
             FancyText fancyTextPart1 = fancyTextContainingMessage.clone();
             fancyTextPart1.setText(array[0]);
-            fancyTextPart1.setRecentChanged();
 
             FancyText fancyTextPart2 = new FancyText("§6 @" + onlinePlayerToSendMessage.getName() + ChatColor.getLastColors(array[0])).setHoverText("§aO jogador " + player.getName() + " marcou você!");
 
             FancyText fancyTextPart3 = fancyTextContainingMessage.clone();
             fancyTextPart3.setText(array[1]);
-            fancyTextPart3.setRecentChanged();
 
-            textToSend.add(fancyTextPart1);
-            textToSend.add(fancyTextPart2);
-            textToSend.add(fancyTextPart3);
+            fancyFormatter.append(fancyTextPart1);
+            fancyFormatter.append(fancyTextPart2);
+            fancyFormatter.append(fancyTextPart3);
 
-            textToSend.addAll(textChatList.subList(finalIdOfMSGText + 1,textChatList.size()));
+            fancyFormatter.append(textChatList.subList(finalIdOfMSGText + 1,textChatList.size()).toArray(new FancyText[0]));
 
             FCBukkitUtil.playSound(onlinePlayerToSendMessage.getName(),"entity.experience_orb.pickup");
-            FancyText.sendTo(onlinePlayerToSendMessage,textToSend);
+            fancyFormatter.send(onlinePlayerToSendMessage);
         }else {
-            FancyText.sendTo(onlinePlayerToSendMessage,textChatList);
+            FancyFormatter.of()
+                    .append(textChatList.toArray(new FancyText[0]))
+                    .send(onlinePlayerToSendMessage);
         }
     }
 

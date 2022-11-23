@@ -3,10 +3,9 @@ package br.com.finalcraft.finalchat.commands;
 import br.com.finalcraft.evernifecore.argumento.MultiArgumentos;
 import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.Arg;
 import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
-import br.com.finalcraft.evernifecore.util.FCMessageUtil;
+import br.com.finalcraft.evernifecore.ecplugin.ECPluginManager;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.PermissionNodes;
-import br.com.finalcraft.finalchat.config.ConfigManager;
 import br.com.finalcraft.finalchat.util.messages.SpyMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -53,8 +52,6 @@ public class CoreCommand {
             permission = PermissionNodes.COMMAND_RELOAD
     )
     public void reload(CommandSender sender){
-        ConfigManager.initialize(FinalChat.instance);
-        CommandRegisterer.registerCommands(FinalChat.instance, false);
-        FCMessageUtil.pluginHasBeenReloaded(sender, FinalChat.instance.getName());
+        ECPluginManager.reloadPlugin(sender, FinalChat.instance);
     }
 }

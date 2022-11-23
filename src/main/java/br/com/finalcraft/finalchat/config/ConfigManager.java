@@ -1,9 +1,13 @@
 package br.com.finalcraft.finalchat.config;
 
 import br.com.finalcraft.evernifecore.config.Config;
+import br.com.finalcraft.evernifecore.config.playerdata.PlayerController;
+import br.com.finalcraft.evernifecore.locale.FCLocaleManager;
+import br.com.finalcraft.finalchat.config.data.FancyPlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
 import br.com.finalcraft.finalchat.config.fancychat.FancyTag;
 import br.com.finalcraft.finalchat.config.fancychat.TellTag;
+import br.com.finalcraft.finalchat.messages.FChatMessages;
 import br.com.finalcraft.finalchat.util.ChannelManager;
 import br.com.finalcraft.finalchat.util.IgnoreUtil;
 import br.com.finalcraft.finalchat.util.MuteUtil;
@@ -12,8 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Arrays;
 
 public class ConfigManager {
-
-    public static JavaPlugin instance;
 
     public static Config mainConfig;
     public static Config dataStore;
@@ -29,9 +31,7 @@ public class ConfigManager {
         return customTags;
     }
 
-    public static void initialize(JavaPlugin aInstace){
-        instance = aInstace;
-
+    public static void initialize(JavaPlugin instance){
         mainConfig  = new Config(instance,"config.yml"      ,false);
         dataStore   = new Config(instance,"DataStore.yml"      ,false);
         customTags  = new Config(instance,"CustomTags.yml"      ,false);
@@ -42,12 +42,13 @@ public class ConfigManager {
         TellTag.initialize();                       //Ler TellTag
         FancyChannelController.initialize();        //Ler Canais
         ChannelManager.refresh();                   //Carregar ChannelManager
-        MuteUtil.initialize();                      //Carregar mutes e tempmutes
+        PlayerController.clearPDSections(FancyPlayerData.class);    //Erase previous Lock channels
         try {
             IgnoreUtil.initialize();                //Carregar ignores
         }catch (Exception e){
             e.printStackTrace();
         }
+        FCLocaleManager.loadLocale(instance, FChatMessages.class);
     }
 
     private static final int CURRENT_VERSION = 3;

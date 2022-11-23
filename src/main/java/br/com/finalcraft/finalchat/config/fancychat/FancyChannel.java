@@ -9,11 +9,11 @@ import java.util.List;
 
 public class FancyChannel {
 
-    private String name;
-    private String alias;
-    private String tag_builder;
-    private String permission;
-    private int distance;
+    private final String name;
+    private final String alias;
+    private final String tag_builder;
+    private final String permission;
+    private final int distance;
 
     public List<Player> playersOnThisChannel = new ArrayList<Player>();
 

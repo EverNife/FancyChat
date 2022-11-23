@@ -1,5 +1,6 @@
 package br.com.finalcraft.finalchat.util.messages;
 
+import br.com.finalcraft.evernifecore.fancytext.FancyFormatter;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.util.FancyTextUtil;
@@ -12,11 +13,6 @@ public class SpyMessage {
 
     private static Map<Player,String> spyingPlayers = new HashMap<>(); //Player - Color
 
-    /**
-     *
-     * @return <tt>true</tt> if this player has benn added to the SpyList
-     * @return <tt>false</tt> if this player has benn removed from the SpyList
-     */
     public static void changeSpyState(Player player, String color, boolean state){
         spyingPlayers.remove(player);
         if (state == true){
@@ -35,7 +31,7 @@ public class SpyMessage {
 
         HashSet<UUID> allPlayerWhoHeardUUIDs = new HashSet();
 
-        StringBuilder allPlayerWhoHeardString = new StringBuilder("§7§o The Eye is Watching Us");
+        StringBuilder allPlayerWhoHeardString = new StringBuilder("§7§oThe Eye is Watching Us");
         for (Player player : allPlayerWhoHeard){
             allPlayerWhoHeardString.append("\n§7  - §a" + player.getName());
             allPlayerWhoHeardUUIDs.add(player.getUniqueId());
@@ -46,25 +42,33 @@ public class SpyMessage {
             fancyText.setHoverText("Jogadores que escutaram essa mensagem: \n " + allPlayerWhoHeardString);
         });
 
-
         String previousColor = "§7";
         for (FancyText fancyText : msg) {
             fancyText.setText(previousColor + ChatColor.stripColor(fancyText.getText()));
         }
 
         FinalChat.chatLog(FancyTextUtil.textOnly(msg));
+        FancyFormatter formatter = FancyFormatter.of().append(msg.toArray(new FancyText[0]));
         for (Map.Entry<Player, String> entry : spyingPlayers.entrySet()) {
-            if (entry.getKey().isOnline()){
-                if (!allPlayerWhoHeardUUIDs.contains(entry.getKey().getUniqueId())){
-                    if (!previousColor.equalsIgnoreCase(entry.getValue())){
-                        previousColor = entry.getValue();
-                        for (FancyText fancyText : msg) {
-                            fancyText.setText(previousColor + ChatColor.stripColor(fancyText.getText()));
-                        }
-                    }
-                    FancyText.sendTo(entry.getKey(),msg);
-                }
+            Player staffSpyHearing = entry.getKey();
+            String staffColor = entry.getValue();
+
+            if (staffSpyHearing.isOnline() == false){
+                continue;
             }
+
+            if (allPlayerWhoHeardUUIDs.contains(staffSpyHearing.getUniqueId())){
+                continue;
+            }
+
+            if (!previousColor.equalsIgnoreCase(staffColor)){
+                for (FancyText fancyText : msg) {
+                    fancyText.setText(staffColor + ChatColor.stripColor(fancyText.getText()));
+                }
+                previousColor = staffColor;
+            }
+
+            formatter.send(staffSpyHearing);
         }
     }
 }

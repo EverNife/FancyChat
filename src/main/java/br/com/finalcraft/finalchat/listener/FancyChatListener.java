@@ -1,6 +1,8 @@
 package br.com.finalcraft.finalchat.listener;
 
 import br.com.finalcraft.evernifecore.api.events.ECFullyLoggedInEvent;
+import br.com.finalcraft.evernifecore.config.playerdata.PlayerController;
+import br.com.finalcraft.finalchat.config.data.FancyPlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.util.ChannelManager;
 import br.com.finalcraft.finalchat.util.messages.PublicMessage;
@@ -14,14 +16,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class FancyChatListener implements Listener {
 
-
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onChat(AsyncPlayerChatEvent event){
 		event.setCancelled(true);
 
 		Player player = event.getPlayer();
 
-		FancyChannel fancyChannel = ChannelManager.getPriorityChannel(player);
+		FancyPlayerData playerData = PlayerController.getPDSection(player, FancyPlayerData.class);
+
+		FancyChannel fancyChannel = playerData.extractPriorityChannel();
 
 		PublicMessage.sendPublicMessage(player,fancyChannel,event.getMessage());
 	}
