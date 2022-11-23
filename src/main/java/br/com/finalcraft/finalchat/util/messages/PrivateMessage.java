@@ -33,7 +33,7 @@ public class PrivateMessage {
 
         //Append message prefix
         FancyFormatter textToSender = FancyFormatter.of().append(FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextSender(), sender));
-        FancyFormatter textToTarget = FancyFormatter.of().append(FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextSender(), sender));
+        FancyFormatter textToTarget = FancyFormatter.of().append(FancyTextUtil.parsePlaceholdersAndClone(TellTag.TELL_TAG.getFancyTextReceiver(), sender));
 
         //Replace static variables
         textToSender.replace("{sender}",sender.getName()).replace("{receiver}",target.getName());
