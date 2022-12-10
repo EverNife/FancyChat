@@ -16,6 +16,7 @@ public class FinalChatSendChannelMessageEvent extends Event implements Cancellab
 	private boolean cancelChat = true;
 	
 	public FinalChatSendChannelMessageEvent(CommandSender sender, FancyChannel channel, String msg){
+		super(true);
 		this.sender = sender;
 		this.msg = msg;
 		this.channel = channel;
