@@ -23,7 +23,7 @@ public class FinalChat extends JavaPlugin{
         instance.getLogger().info("[Info] " + msg.replace("&","§"));
     }
     public static void chatLog(String msg){
-        instance.getLogger().info("[ChatLog] " + (MCVersion.isBellow1_7_10() ? ChatColor.stripColor(msg) : msg));
+        instance.getLogger().info("[ChatLog] " + (MCVersion.isLowerEquals(MCVersion.v1_7_10) ? ChatColor.stripColor(msg) : msg));
     }
     public static void debug(String msg){
         instance.getLogger().info("[Debug] " + msg.replace("&","§"));
