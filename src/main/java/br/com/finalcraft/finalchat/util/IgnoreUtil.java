@@ -1,5 +1,6 @@
 package br.com.finalcraft.finalchat.util;
 
+import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.config.ConfigManager;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
@@ -21,7 +22,11 @@ public class IgnoreUtil {
 
         essentialsEnabled = Bukkit.getPluginManager().isPluginEnabled("Essentials");
         if (essentialsEnabled){
-            FinalChat.info("[Essentials Found] Utilizando ESS-Ignore System");
+            if (FCBukkitUtil.isClassLoaded("com.earth2me.essentials.api.ESAPIUtil")){
+                FinalChat.info("[Essentials Found] Utilizando ESS-Ignore System");
+            }else{
+                essentialsEnabled = false;
+            }
             return;
         }
 
