@@ -2,7 +2,7 @@ package br.com.finalcraft.finalchat.listener;
 
 import br.com.finalcraft.evernifecore.api.events.ECFullyLoggedInEvent;
 import br.com.finalcraft.evernifecore.config.playerdata.PlayerController;
-import br.com.finalcraft.evernifecore.util.FCScheduller;
+import br.com.finalcraft.evernifecore.scheduler.FCScheduler;
 import br.com.finalcraft.finalchat.config.data.FancyPlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.util.ChannelManager;
@@ -30,7 +30,7 @@ public class FancyChatListener implements Listener {
 		if (event.isAsynchronous()){
 			PublicMessage.sendPublicMessage(player,fancyChannel,event.getMessage());
 		}else {
-			FCScheduller.runAssync(() -> {
+			FCScheduler.runAssync(() -> {
 				PublicMessage.sendPublicMessage(player,fancyChannel,event.getMessage());
 			});
 		}

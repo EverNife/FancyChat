@@ -6,7 +6,6 @@ import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
 import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
 import br.com.finalcraft.finalchat.config.data.FancyPlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
-import br.com.finalcraft.finalchat.util.ChannelManager;
 import org.bukkit.entity.Player;
 
 public class CMDChannelLock {

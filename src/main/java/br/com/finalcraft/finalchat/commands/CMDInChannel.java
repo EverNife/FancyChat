@@ -6,11 +6,10 @@ import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.Arg;
 import br.com.finalcraft.evernifecore.commands.finalcmd.annotations.FinalCMD;
 import br.com.finalcraft.evernifecore.commands.finalcmd.custom.ICustomFinalCMD;
 import br.com.finalcraft.evernifecore.commands.finalcmd.custom.contexts.CustomizeContext;
-import br.com.finalcraft.evernifecore.util.FCScheduller;
+import br.com.finalcraft.evernifecore.scheduler.FCScheduler;
 import br.com.finalcraft.finalchat.config.data.FancyPlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.messages.FChatMessages;
-import br.com.finalcraft.finalchat.util.ChannelManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -54,6 +53,6 @@ public class CMDInChannel implements ICustomFinalCMD {
 
         Set<Player> onlinePlayer = new HashSet(Bukkit.getOnlinePlayers());
         AsyncPlayerChatEvent event = new AsyncPlayerChatEvent(true, player, argumentos.joinStringArgs(), onlinePlayer);
-        FCScheduller.runAssync(() -> Bukkit.getServer().getPluginManager().callEvent(event));
+        FCScheduler.runAssync(() -> Bukkit.getServer().getPluginManager().callEvent(event));
     }
 }

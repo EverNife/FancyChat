@@ -10,7 +10,6 @@ import br.com.finalcraft.finalchat.config.fancychat.TellTag;
 import br.com.finalcraft.finalchat.messages.FChatMessages;
 import br.com.finalcraft.finalchat.util.ChannelManager;
 import br.com.finalcraft.finalchat.util.IgnoreUtil;
-import br.com.finalcraft.finalchat.util.MuteUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;

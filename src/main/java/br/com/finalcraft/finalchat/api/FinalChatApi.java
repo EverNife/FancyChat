@@ -4,7 +4,6 @@ import br.com.finalcraft.evernifecore.config.playerdata.PlayerController;
 import br.com.finalcraft.finalchat.config.data.FancyPlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
-import br.com.finalcraft.finalchat.util.ChannelManager;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;

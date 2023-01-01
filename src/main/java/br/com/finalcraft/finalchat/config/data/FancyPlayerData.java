@@ -1,7 +1,6 @@
 package br.com.finalcraft.finalchat.config.data;
 
 import br.com.finalcraft.evernifecore.config.playerdata.PDSection;
-import br.com.finalcraft.evernifecore.config.playerdata.PlayerController;
 import br.com.finalcraft.evernifecore.config.playerdata.PlayerData;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannel;
 import br.com.finalcraft.finalchat.config.fancychat.FancyChannelController;
