@@ -1,6 +1,7 @@
 package br.com.finalcraft.finalchat;
 
 import br.com.finalcraft.evernifecore.ecplugin.annotations.ECPlugin;
+import br.com.finalcraft.evernifecore.listeners.base.ECListener;
 import br.com.finalcraft.evernifecore.version.MCVersion;
 import br.com.finalcraft.finalchat.commands.CommandRegisterer;
 import br.com.finalcraft.finalchat.config.ConfigManager;
@@ -10,7 +11,6 @@ import br.com.finalcraft.finalchat.listener.FancyChatListener;
 import br.com.finalcraft.finalchat.placeholders.PlaceHolderIntegration;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -29,8 +29,6 @@ public class FinalChat extends JavaPlugin{
         instance.getLogger().info("[Debug] " + msg.replace("&","§"));
     }
 
-    private FancyChatListener fancyChatListener = new FancyChatListener();
-
     @Override
     public void onEnable() {
         instance = this;
@@ -44,7 +42,7 @@ public class FinalChat extends JavaPlugin{
         CommandRegisterer.registerCommands(this, true);
 
         info("&aRegistrando Listeners");
-        this.getServer().getPluginManager().registerEvents(fancyChatListener, this);
+        ECListener.register(this, FancyChatListener.class);
 
         //Iniciando PlaceHolderAPI Integration
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
@@ -67,7 +65,7 @@ public class FinalChat extends JavaPlugin{
 
     @Override
     public void onDisable() {
-        HandlerList.unregisterAll(fancyChatListener);
+
     }
 
     @ECPlugin.Reload

@@ -9,29 +9,17 @@ import org.bukkit.event.HandlerList;
 public class FinalChatSendChannelMessageEvent extends Event implements Cancellable {
 
 	private static final HandlerList handlers = new HandlerList();
-	private boolean cancelled;
 	private final CommandSender sender;
 	private String msg;
 	private FancyChannel channel;
-	private boolean cancelChat = true;
-	
+	private boolean cancelled;
+
 	public FinalChatSendChannelMessageEvent(CommandSender sender, FancyChannel channel, String msg){
 		super(true);
 		this.sender = sender;
 		this.msg = msg;
 		this.channel = channel;
 	}
-
-
-	public void cancelIncomingChat(boolean cancel){
-		this.cancelChat = cancel;
-	}
-	
-
-	public boolean getCancelIncomingChat(){
-		return this.cancelChat;
-	}
-
 
 	public FancyChannel getChannel(){
 		return this.channel;
