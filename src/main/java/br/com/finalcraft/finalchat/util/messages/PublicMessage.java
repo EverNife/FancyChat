@@ -2,7 +2,7 @@ package br.com.finalcraft.finalchat.util.messages;
 
 import br.com.finalcraft.evernifecore.fancytext.FancyFormatter;
 import br.com.finalcraft.evernifecore.fancytext.FancyText;
-import br.com.finalcraft.evernifecore.util.FCBukkitUtil;
+import br.com.finalcraft.evernifecore.sound.FCSound;
 import br.com.finalcraft.evernifecore.util.FCColorUtil;
 import br.com.finalcraft.finalchat.FinalChat;
 import br.com.finalcraft.finalchat.PermissionNodes;
@@ -133,7 +133,7 @@ public class PublicMessage {
 
             fancyFormatter.append(textChatList.subList(finalIdOfMSGText + 1,textChatList.size()).toArray(new FancyText[0]));
 
-            FCBukkitUtil.playSound(onlinePlayerToSendMessage.getName(),"entity.experience_orb.pickup");
+            FCSound.EXPERIENCE_ORB.playSoundFor(onlinePlayerToSendMessage);
             fancyFormatter.send(onlinePlayerToSendMessage);
         }else {
             FancyFormatter.of()
