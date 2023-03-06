@@ -25,8 +25,6 @@ public class CommandRegisterer {
             FinalCMDManager.registerCommand(pluginInstance, CMDTell.class);
             FinalCMDManager.registerCommand(pluginInstance, CMDChannelLock.class);
             FinalCMDManager.registerCommand(pluginInstance, CMDMuteAll.class);
-            FinalCMDManager.registerCommand(pluginInstance, CMDBroadcast.class);
-            FinalCMDManager.registerCommand(pluginInstance, CMDFancyMessage.class);
         }
 
         for (String registeredCommand : registeredAliases) {
