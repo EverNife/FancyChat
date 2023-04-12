@@ -47,7 +47,7 @@ public class ArgParserFancyChannel extends ArgParser<FancyChannel> {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(Context context) {
+    public @NotNull List<String> tabComplete(TabContext context) {
 
         List<String> matched = new ArrayList<>();
 

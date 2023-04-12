@@ -29,8 +29,8 @@ public class CMDInChannel implements ICustomFinalCMD {
     @Override
     public void customize(@NotNull CustomizeContext context) {
         context.getFinalCMDData()
-                .permission(fancyChannel.getPermission())
-                .labels(
+                .setPermission(fancyChannel.getPermission())
+                .setLabels(
                         new String[]{fancyChannel.getName(), fancyChannel.getAlias()}
                 );
     }
