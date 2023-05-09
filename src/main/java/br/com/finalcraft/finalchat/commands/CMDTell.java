@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 public class CMDTell {
 
     @FinalCMD(
-            aliases = {"ftell","tell","whispper","t","w","msg","private"}
+            aliases = {"ftell","tell","whispper","t","w","m","msg","private"}
     )
     public void tell(Player player, MultiArgumentos argumentos, @Arg(name = "<Player>") Player target, @Arg(name = "<msg>") String message){
         message = argumentos.joinStringArgs(1);
