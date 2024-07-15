@@ -28,16 +28,15 @@ repositories {
 
 dependencies {
 
-    compile 'br.com.finalcraft:EverNifeCore:2.0.4'
+    compileOnly 'br.com.finalcraft:EverNifeCore:2.0.4'
 
-    compile name: "EssentialsX-2.15.0.evernife.v1b"
-    compile name: "MambaFactions"
-    compile name: "MambaMassiveCore"
+    compileOnly name: "EssentialsX-2.15.0.evernife.v1b"
+    compileOnly name: "MambaFactions"
+    compileOnly name: "MambaMassiveCore"
 
-    compile 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
 
-    compile 'org.jetbrains:annotations:16.0.2'
+    compileOnly 'org.jetbrains:annotations:16.0.2'
 }
 
 publishing {
