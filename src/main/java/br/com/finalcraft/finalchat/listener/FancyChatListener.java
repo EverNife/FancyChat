@@ -30,7 +30,7 @@ public class FancyChatListener implements ECListener {
 		if (event.isAsynchronous()){
 			PublicMessage.sendPublicMessage(player,fancyChannel,event.getMessage());
 		}else {
-			FCScheduler.runAssync(() -> {
+			FCScheduler.runAsync(() -> {
 				PublicMessage.sendPublicMessage(player,fancyChannel,event.getMessage());
 			});
 		}

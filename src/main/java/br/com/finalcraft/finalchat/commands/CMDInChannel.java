@@ -53,6 +53,6 @@ public class CMDInChannel implements ICustomFinalCMD {
 
         Set<Player> onlinePlayer = new HashSet(Bukkit.getOnlinePlayers());
         AsyncPlayerChatEvent event = new AsyncPlayerChatEvent(true, player, argumentos.joinStringArgs(), onlinePlayer);
-        FCScheduler.runAssync(() -> Bukkit.getServer().getPluginManager().callEvent(event));
+        FCScheduler.runAsync(() -> Bukkit.getServer().getPluginManager().callEvent(event));
     }
 }
